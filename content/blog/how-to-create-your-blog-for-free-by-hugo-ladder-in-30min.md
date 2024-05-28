@@ -425,3 +425,20 @@ git push origin main
 如果部署时，有任何问题，可以在下方留言。
 
 原文链接: https://guangzhengli.com/zh/blog/zh/how-to-create-your-blog-for-free-by-hugo-ladder-in-30min/
+
+<script src="https://giscus.app/client.js"
+        data-repo="ProseGuys/ProseGuys.github.io"
+        data-repo-id="R_kgDOMBAKKw"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOMBAKK84CfppF"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="preferred_color_scheme"
+        data-lang="zh-CN"
+        crossorigin="anonymous"
+        async>
+</script>
+
