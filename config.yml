@@ -1,9 +1,9 @@
 baseURL: 'https://proseguys.github.io/'
-title: Cling_o3's Zoom 
+title: 人间客
 theme: ladder
 license: MIT
 licenselink: 'https://github.com/guangzhengli/hugo-theme-ladder/blob/master/LICENSE'
-description: 'A fast, clean Hugo theme'
+description: '余家贫'
 homepage: 'https://hugo-ladder.pages.dev'
 googleAnalytics: G-xxx
 paginate: 10
@@ -27,9 +27,9 @@ menu:
 params:
   brand: HOME
   avatarURL: /images/avatar.png
-  author: Cling 
-  authorDescription: Cling's Zoom 
-  info: Cling's Zoom 
+  author: 人间客 
+  authorDescription: 余家贫, 无从致书以观 
+  info: 
   favicon: /images/avatar.png
   options:
     showDarkMode: true
@@ -41,13 +41,13 @@ params:
   comments:
     giscus:
       enable: true
-      repo: username/reponame
-      repo_id: R_xxx
+      repo: ProseGuys/ProseGuys.github.io
+      repo_id: R_kgDOMBAKKw
       category: Announcements
-      category_id: DIC_xxx
+      category_id: DIC_kwDOMBAKK84CfppF 
       mapping: pathname
-      position: top
-      lang: zh # pick a language from https://github.com/giscus/giscus/tree/main/locales
+      position: bottom
+      lang: zh-CN # pick a language from https://github.com/giscus/giscus/tree/main/locales
     utteranc:
       enable: false
       repo: username/reponame
