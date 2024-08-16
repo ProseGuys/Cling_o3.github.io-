@@ -22,7 +22,7 @@ menu:
       url: /guestbook
       weight: 4
     - name: 网站统计 
-      url: https://umami-ochre-nu.vercel.app/share/R1lHz7QY/hugo-ladder-exampleSite
+      url: https://us.umami.is/websites/94da0caf-f5e4-4169-9315-aeef16702256 
       weight: 5
 params:
   brand: HOME
@@ -58,7 +58,7 @@ params:
     umami:
       enable: true
       website_id: xxx
-      url: https://umami-ochre-nu.vercel.app/hugo-ladder.js
+      url: https://us.umami.is/websites/94da0caf-f5e4-4169-9315-aeef16702256 
   guestbook:
     title: 留言板 
     description: 您的评论，会让该网站更精彩！ 
