@@ -1,1098 +1,238 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Blogs on Cling_o3's Zoom</title><link>https://proseguys.github.io/blog/</link><description>Recent content in Blogs on Cling_o3's Zoom</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 24 May 2024 10:38:19 +0800</lastBuildDate><atom:link href="https://proseguys.github.io/blog/index.xml" rel="self" type="application/rss+xml"/><item><title>first bolg</title><link>https://proseguys.github.io/blog/my-first-blog/</link><pubDate>Fri, 24 May 2024 10:38:19 +0800</pubDate><guid>https://proseguys.github.io/blog/my-first-blog/</guid><description>&lt;p>Here is summary.&lt;/p>
-&lt;p>here is your content.&lt;/p></description></item><item><title>如何零成本给博客集成 umami 数据统计分析功能</title><link>https://proseguys.github.io/blog/how-to-integrate-umami-for-free-to-blog-site/</link><pubDate>Sun, 14 Aug 2022 21:34:36 +0800</pubDate><guid>https://proseguys.github.io/blog/how-to-integrate-umami-for-free-to-blog-site/</guid><description>&lt;p>本篇文章介绍如何零成本给博客或者网站集成 &lt;a href="https://umami.is/">umami&lt;/a> 统计功能。数据库用的是 &lt;a href="https://app.supabase.com/">supabase&lt;/a> 提供的有限额的 &lt;a href="https://supabase.com/docs/guides/database">postgres&lt;/a>，不过免费提供的 500M 对于 &lt;a href="https://umami.is/">umami&lt;/a> 来讲已经足够了。&lt;/p>
-&lt;p>托管 &lt;a href="https://umami.is/">umami&lt;/a> 服务用的是 &lt;a href="https://vercel.com/">vercel&lt;/a>。得益于现在的云厂商优秀的服务能力，你可以在 10 分钟内集成好 &lt;em>umami&lt;/em>。可以点击 &lt;a href="https://umami-ochre-nu.vercel.app/share/o3zAba1V/guangzhengli">数据统计看板&lt;/a> 查看最终效果。&lt;/p>
-&lt;h2 id="创建数据库">创建数据库&lt;/h2>
-&lt;p>数据库用的是 &lt;a href="https://app.supabase.com/">supabase&lt;/a> 提供的有限额的 &lt;a href="https://supabase.com/docs/guides/database">postgres&lt;/a> 数据库，创建一个 supabase 账号，新建一个项目，输入 Datebase password 即可创建数据库服务。&lt;/p>
-&lt;p>&lt;img src="https://cdn.jsdelivr.net/gh/guangzhengli/PicURL@master/uPic/cN3Zg4.png" alt="cN3Zg4">&lt;/p>
-&lt;p>创建可能会话费几分钟时间，创建完成后只需要拿到 &lt;code>DATABASE_URL&lt;/code> 即可。&lt;/p>
-&lt;p>&lt;img src="https://cdn.jsdelivr.net/gh/guangzhengli/PicURL@master/uPic/image-20220815182141638.png" alt="image-20220815182141638">&lt;/p>
-&lt;h2 id="托管-umami">托管 umami&lt;/h2>
-&lt;p>托管 &lt;a href="https://umami.is/">umami&lt;/a> 服务用的是 &lt;a href="https://vercel.com/">vercel&lt;/a>。创建好数据库实例之后，可以通过 Vercel 一键部署 umami 服务了。访问 &lt;a href="https://umami.is/">umami 官方文档&lt;/a> 的 &lt;a href="https://umami.is/docs/running-on-vercel">Running on Vercel&lt;/a> 模块，有操作说明与一键部署脚本。&lt;/p>
-&lt;p>首先我们登录 GitHub 账号， &lt;code>fork&lt;/code> umami (&lt;a href="https://github.com/umami-software/umami">https://github.com/umami-software/umami&lt;/a>) 项目。&lt;/p>
-&lt;p>登录 &lt;a href="https://vercel.com/">vercel&lt;/a> ，创建一个的账号，建议使用 GitHub 账号注册登录，在 &lt;code>new project&lt;/code> 中选择 &lt;code>import&lt;/code> 你刚刚 &lt;code>fork&lt;/code> 的项目。&lt;/p>
-&lt;p>之后填写环境变量，这里我们需要填写两个环境变量&lt;/p>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Blogs on 人间客</title><link>https://proseguys.github.io/blog/</link><description>Recent content in Blogs on 人间客</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Thu, 15 Aug 2024 15:54:10 +0800</lastBuildDate><atom:link href="https://proseguys.github.io/blog/index.xml" rel="self" type="application/rss+xml"/><item><title>PDF 格式化提取调研</title><link>https://proseguys.github.io/blog/pdf_extractor_report/</link><pubDate>Thu, 15 Aug 2024 15:54:10 +0800</pubDate><guid>https://proseguys.github.io/blog/pdf_extractor_report/</guid><description>&lt;p>在整理PDF 格式化内容提取方案时，发现当前网上所提及的库要么落后于时代版本要么就是各种文字描述语焉不详。因此根据调研结果重新整理&lt;/p>
+&lt;h2 id="需求">需求：&lt;/h2>
+&lt;p>提取PDF文件内容，如果PDF文件中数据之间包含段落关系，需保留其段落关系。&lt;/p>
+&lt;h2 id="困难点">困难点：&lt;/h2>
+&lt;p>由于PDF文件可以有多种来源生成，如html文件转换、markdown文件转换、文本影印等。部分来源文件天然不存在段落关系或者文字信息不清晰等，因此本文调研优先考虑由html和markdown等层级化文件转换成的PDF文件内容提取。&lt;/p>
+&lt;h2 id="实验方案">实验方案：&lt;/h2>
+&lt;p>使用由markdown文件生成的PDF文件进行内容提取，对比各自提取结构和结果&lt;/p>
+&lt;p>测试文件：&lt;/p>
+&lt;p>&lt;a href="https://proseguys.github.io/images/pdf_extractor_report/test.pdf">test.pdf&lt;/a>&lt;/p>
+&lt;h2 id="调研对象">调研对象&lt;/h2>
 &lt;ul>
-&lt;li>DATABASE_URL：在创建数据库中拿到的 DATABASE_URL&lt;/li>
-&lt;li>TRACKER_SCRIPT_NAME： 这里默认的 &lt;code>tracker_script_name&lt;/code> 可能会导致部分 &lt;code>AdBlock&lt;/code> 拦截请求，损失一部分的访问数据，所以这里我填的是 &lt;code>hugo-ladder&lt;/code>。&lt;/li>
+&lt;li>pdfplumber&lt;/li>
+&lt;li>pdfminer.six&lt;/li>
+&lt;li>PyMuPDF&lt;/li>
+&lt;li>pypdfium2&lt;/li>
+&lt;li>marker&lt;/li>
+&lt;li>MinerU&lt;/li>
 &lt;/ul>
-&lt;p>最后在 Build 阶段， &lt;code>build command&lt;/code> 记得填写 &lt;code>yarn build &amp;amp;&amp;amp; yarn update-db&lt;/code>，这样的话会自动 migrate 数据库的表。无需自己手动导入。&lt;/p>
-&lt;p>&lt;img src="https://cdn.jsdelivr.net/gh/guangzhengli/PicURL@master/uPic/gePzXI.png" alt="gePzXI">&lt;/p>
-&lt;p>当然如果你想自己导入的话，也可以直接从这里 &lt;a href="https://github.com/umami-software/umami/blob/master/sql/schema.postgresql.sql">https://github.com/umami-software/umami/blob/master/sql/schema.postgresql.sql&lt;/a> 获取需要的表。&lt;/p>
-&lt;h2 id="配置-umami">配置 umami&lt;/h2>
-&lt;p>在 vercel 部署完成 umami 后会得到一个 &lt;code>&amp;lt;deploy-id&amp;gt;.vercel.app&lt;/code> ，我们访问它，默认的账号密码是 &lt;strong>admin&lt;/strong> 和 &lt;strong>umami&lt;/strong>。&lt;/p>
-&lt;p>完成基础帐号配置后，点击侧边栏网站 Tab，点击添加网站。填写网站基本信息，可以勾选 &lt;code>enable share URL&lt;/code>，这样任何人都可以访问这个数据看板。&lt;/p>
-&lt;p>我们拿到对应的 &lt;code>data-website-id&lt;/code> 和 &lt;code>src&lt;/code> ，填入主题配置中的 &lt;code>params.analytics.umami.website_id&lt;/code> 和 &lt;code>params.analytics.umami.url&lt;/code> 即可。&lt;/p>
-&lt;p>&lt;img src="https://cdn.jsdelivr.net/gh/guangzhengli/PicURL@master/uPic/OZcU7U.png" alt="OZcU7U">&lt;/p>
-&lt;p>最终，我们可以得到本站数据统计看板的功能🎉🎉🎉&lt;/p>
-&lt;p>原文链接: &lt;a href="https://guangzhengli.com/zh/blog/zh/how-to-integrate-umami-for-free-to-blog-site/">https://guangzhengli.com/zh/blog/zh/how-to-integrate-umami-for-free-to-blog-site/&lt;/a>&lt;/p></description></item><item><title>如何 30 分钟搭建一套完整独立博客</title><link>https://proseguys.github.io/blog/how-to-create-your-blog-for-free-by-hugo-ladder-in-30min/</link><pubDate>Sun, 14 Aug 2022 16:47:12 +0800</pubDate><guid>https://proseguys.github.io/blog/how-to-create-your-blog-for-free-by-hugo-ladder-in-30min/</guid><description>&lt;p>本文是关于如何搭建免费的独立博客系列的第二篇，包括如何使用本博客主题 &lt;code>hugo-ladder&lt;/code>，如何集成评论和统计功能等。如果后续打算使用该主题来搭建和运营博客，建议跟随本篇文章来搭建。&lt;/p>
-&lt;h2 id="hugo">Hugo&lt;/h2>
-&lt;h3 id="技术选型">技术选型&lt;/h3>
-&lt;p>今天的大多数网站分为两类&amp;ndash;动态网站和静态网站。动态网站是基于服务器的，它的内容是变化的，可以根据用户返回不同的内容。例如根据不同用户的喜好进行推荐，根据地区进行内容语言区分。页面依靠内容管理系统（CMS）或数据库进行渲染，并可以随着需求的增长而不断增加复杂性。而缺点的话也很明显，首先你需要一笔不菲的服务器费用来支持带宽和并发，如果服务是面向全球的，还需要考虑多地部署来提升访问速度。&lt;/p>
-&lt;p>还有一种就是我们选择的静态网站，使用 static site generators (SSG) 技术，会向所有用户显示相同的内容。使用服务器端的渲染来提供HTML、CSS和Javascript文件。静态网站的优势包括速度、安全和SEO。还易于维护，并具有高度可扩展性。由于静态网站生成器（SSG）在CDN上存储一个已经编译好的页面，它们的加载速度要快得多。&lt;/p>
-&lt;p>我们可以选择免费托管到 CDN 或者平台 &lt;a href="https://netlify.com/">Netlify&lt;/a>、&lt;a href="https://www.heroku.com/">Heroku&lt;/a>、&lt;a href="https://www.godaddy.com/">GoDaddy&lt;/a>、&lt;a href="https://www.dreamhost.com/">DreamHost&lt;/a>、&lt;a href="https://pages.github.com/">GitHub Pages&lt;/a>、&lt;a href="https://about.gitlab.com/features/pages/">GitLab Pages&lt;/a>、&lt;a href="https://surge.sh/">Surge&lt;/a>、&lt;a href="https://firebase.google.com/docs/hosting/">Firebase&lt;/a>、&lt;a href="https://cloud.google.com/storage/">Google Cloud Storage&lt;/a>、&lt;a href="https://aws.amazon.com/s3/">Amazon S3&lt;/a>、&lt;a href="https://www.rackspace.com/cloud/files">Rackspace&lt;/a>、&lt;a href="https://docs.microsoft.com/en-us/azure/storage/blobs/storage-blob-static-website">Azure&lt;/a>和 &lt;a href="https://aws.amazon.com/cloudfront/">CloudFront&lt;/a> 上。&lt;/p>
-&lt;p>对于开发者来讲，托管到 &lt;a href="https://pages.github.com/">GitHub Pages&lt;/a> 是最熟悉的方案，我们本篇文章也是基于此方案展开的教程。不过 &lt;a href="https://pages.github.com/">GitHub Pages&lt;/a> 对于部分地区的访问速度来讲并不友好，可以考虑使用其它自带 CDN 的免费平台来部署，例如本站使用的 &lt;a href="https://pages.cloudflare.com/">Cloudflare Pages&lt;/a>。&lt;/p>
-&lt;p>在 static site generators (SSG) 方案中，有几种常见的方案，&lt;a href="https://hexo.io/">Hexo&lt;/a>, &lt;a href="https://jekyllrb.com/">Jekyll&lt;/a>, &lt;a href="https://gohugo.io/">Hugo&lt;/a> 和 &lt;a href="https://nextjs.org/">Next.js&lt;/a>。&lt;/p>
-&lt;p>其中 &lt;a href="https://hexo.io/">Hexo&lt;/a> 的生态是最丰富和完善的，在 GitHub 中能找到最多的主题适配、最完善的第三方支持。但是考虑到我后续会自己开发定制化的主题和功能，去翻阅了下 &lt;a href="https://hexo.io/">Hexo&lt;/a> 的官方文档，结果 &lt;a href="https://hexo.io/">Hexo&lt;/a> 的文档不能说是事无巨细吧，只能说是等于没有。&lt;a href="https://nextjs.org/">Next.js&lt;/a> 是非常符合未来的一门技术，也是我比较心动的方案，但是后续发现 &lt;a href="https://nextjs.org/">Next.js&lt;/a> 在开发博客的生态上目前还不够完善。&lt;/p>
-&lt;p>所以在对比了几项技术的优缺点后，我最终采用了Hugo。&lt;a href="https://gohugo.io/">Hugo&lt;/a> 是基于 &lt;code>golang&lt;/code> 编写的快速、现代的静态网站生成器。在 benchmark 测试中可以一秒渲染 5000 篇文章，也具备完善的生态。&lt;/p>
-&lt;h3 id="安装">安装&lt;/h3>
-&lt;p>安装 &lt;code>Hugo&lt;/code> 可以按照官方的文档一步一步安装 &lt;a href="https://gohugo.io/getting-started/installing">hugo install&lt;/a>。也可以按照下面命令快速安装。&lt;/p>
-&lt;div class="tabs tabs-left">
-&lt;style>
-.tabs input#tab-0-0:checked ~ .tab-content-0-0 {
-display: block;
-}
-&lt;/style>
-&lt;input type="radio" class="tab-input" name="tab-select-0" id="tab-0-0" checked/>
-&lt;label for="tab-0-0" class="tab-label">MacOS / Linux&lt;/label>
-&lt;div class="tab-content tab-content-0-0">
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>brew install hugo
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>
-&lt;/div>
-&lt;style>
-.tabs input#tab-0-1:checked ~ .tab-content-0-1 {
-display: block;
-}
-&lt;/style>
-&lt;input type="radio" class="tab-input" name="tab-select-0" id="tab-0-1" />
-&lt;label for="tab-0-1" class="tab-label">Window&lt;/label>
-&lt;div class="tab-content tab-content-0-1">
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>choco install hugo -confirm
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>
-&lt;/div>
-&lt;/div>
-&lt;p>可以通过 &lt;code>hugo version&lt;/code> 来确保安装成功。&lt;/p>
-&lt;h2 id="ladder">Ladder&lt;/h2>
-&lt;p>本博客的主题名为 &lt;code>ladder&lt;/code>，中文即阶梯的含义，读书为输入，写作为输出，都是获取知识的阶梯。&lt;/p>
-&lt;p>Ladder 主题的仓库地址是：&lt;a href="https://github.com/guangzhengli/hugo-theme-ladder">https://github.com/guangzhengli/hugo-theme-ladder&lt;/a>&lt;/p>
-&lt;p>为大家准备好的一个已经配置好的仓库地址是： &lt;a href="https://github.com/guangzhengli/hugo-ladder-exampleSite">https://github.com/guangzhengli/hugo-ladder-exampleSite&lt;/a>&lt;/p>
-&lt;p>如果你打算熟悉 &lt;code>hugo&lt;/code> 命令或者后续持续开发的话 ，可以从 &lt;a href="#%E9%85%8D%E7%BD%AE%E5%88%9D%E5%A7%8B%E5%8C%96">#配置初始化&lt;/a>一步一步来。&lt;/p>
-&lt;p>如果你之前没有使用过 &lt;code>hugo&lt;/code> 或者是打算迁移博客的话，可以直接输入克隆已经初始化好的，在浏览器打开 &lt;code>http://localhost:1313/&lt;/code>。&lt;strong>并且可以直接跳转到 &lt;a href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E9%85%8D%E7%BD%AE">#自定义配置&lt;/a>。无需做初始化操作&lt;/strong>。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>git clone https://github.com/guangzhengli/hugo-ladder-exampleSite.git
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>hugo server -D
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="配置初始化">配置初始化&lt;/h3>
-&lt;p>Hugo 提供了一个 &lt;code>new&lt;/code> 命令来创建一个新的网站:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>hugo new site my_website
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cd my_website
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>初始化你的项目目录为 git 仓库, 并且把主题仓库作为你的网站目录的子模块。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>git init
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git submodule add https://github.com/guangzhengli/hugo-theme-ladder themes/ladder
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>因为个人偏爱 &lt;code>yml&lt;/code> 的阅读习惯，所以本文使用 &lt;code>yml&lt;/code> 而非默认的 &lt;code>toml&lt;/code> 文件类型来配置，大家可以根据偏好到 &lt;a href="https://transform.tools/yaml-to-toml">transform.tool&lt;/a> 进行转换。&lt;/p>
-&lt;p>下面是本主题完整的 &lt;code>config.yml&lt;/code> 文件，大家可以删除根目录下默认的 &lt;code>config.toml&lt;/code> 文件，新建一个 &lt;code>config.yml&lt;/code> 文件代替。&lt;/p>
-&lt;p>
-&lt;details class="toggle">
-&lt;summary markdown="span">点击查看完整的 &lt;code>config.yml&lt;/code> 文件&lt;/summary>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yml" data-lang="yml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">baseURL&lt;/span>: &lt;span style="color:#e6db74">&amp;#39;https://hugo-ladder.pages.dev&amp;#39;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">title&lt;/span>: &lt;span style="color:#ae81ff">LADDER&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">theme&lt;/span>: &lt;span style="color:#ae81ff">hugo-theme-ladder&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">license&lt;/span>: &lt;span style="color:#ae81ff">MIT&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">licenselink&lt;/span>: &lt;span style="color:#e6db74">&amp;#39;https://github.com/guangzhengli/hugo-theme-ladder/blob/master/LICENSE&amp;#39;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">description&lt;/span>: &lt;span style="color:#e6db74">&amp;#39;A fast, clean Hugo theme&amp;#39;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">homepage&lt;/span>: &lt;span style="color:#e6db74">&amp;#39;https://hugo-ladder.pages.dev&amp;#39;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">defaultContentLanguage&lt;/span>: &lt;span style="color:#e6db74">&amp;#39;en&amp;#39;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">googleAnalytics&lt;/span>: &lt;span style="color:#ae81ff">G-xxx&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">paginate&lt;/span>: &lt;span style="color:#ae81ff">10&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">params&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">brand&lt;/span>: &lt;span style="color:#ae81ff">HOME&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">avatarURL&lt;/span>: &lt;span style="color:#ae81ff">/images/avatar.png&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">author&lt;/span>: &lt;span style="color:#ae81ff">Hugo Ladder&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">authorDescription&lt;/span>: &lt;span style="color:#ae81ff">A clean, fast hugo theme focused on Reading&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">info&lt;/span>: &lt;span style="color:#ae81ff">Build a free and beautiful blog site to record your thoughts and increase your influence&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">favicon&lt;/span>: &lt;span style="color:#ae81ff">/images/avatar.png&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">options&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">showDarkMode&lt;/span>: &lt;span style="color:#66d9ef">true&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">enableImgZooming&lt;/span>: &lt;span style="color:#66d9ef">true&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">enableMultiLang&lt;/span>: &lt;span style="color:#66d9ef">true&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">darkModeTheme&lt;/span>: &lt;span style="color:#ae81ff">data-dark-mode&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">#darkModeTheme: icy-dark-mode&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">comments&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">giscus&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">enable&lt;/span>: &lt;span style="color:#66d9ef">true&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">repo&lt;/span>: &lt;span style="color:#ae81ff">username/repo&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">repo_id&lt;/span>: &lt;span style="color:#ae81ff">xxx&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">category&lt;/span>: &lt;span style="color:#ae81ff">Announcements&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">category_id&lt;/span>: &lt;span style="color:#ae81ff">xxx&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">mapping&lt;/span>: &lt;span style="color:#ae81ff">pathname&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">position&lt;/span>: &lt;span style="color:#ae81ff">top&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">lang&lt;/span>: &lt;span style="color:#ae81ff">en&lt;/span> &lt;span style="color:#75715e"># pick a language from https://github.com/giscus/giscus/tree/main/locales&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">utteranc&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">enable&lt;/span>: &lt;span style="color:#66d9ef">false&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">repo&lt;/span>: &lt;span style="color:#ae81ff">username/xxx&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">issueTerm&lt;/span>: &lt;span style="color:#ae81ff">pathname&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">analytics&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">google&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">SiteVerificationTag&lt;/span>: &lt;span style="color:#ae81ff">xxx&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">umami&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">enable&lt;/span>: &lt;span style="color:#66d9ef">true&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">website_id&lt;/span>: &lt;span style="color:#ae81ff">xxx&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">url&lt;/span>: &lt;span style="color:#ae81ff">https://xxx&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">guestbook&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">title&lt;/span>: &lt;span style="color:#ae81ff">Guestbook&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">description&lt;/span>: &lt;span style="color:#ae81ff">Leave a comment below. It could be anything –- question, appreciation, information, or even humor.&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">social&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">GitHub&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">pre&lt;/span>: &amp;gt;-&lt;span style="color:#e6db74">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> &amp;lt;svg xmlns=&amp;#34;http://www.w3.org/2000/svg&amp;#34; width=&amp;#34;20&amp;#34; height=&amp;#34;20&amp;#34; viewBox=&amp;#34;0 0 24 24&amp;#34; fill=&amp;#34;none&amp;#34; stroke=&amp;#34;currentColor&amp;#34; stroke-width=&amp;#34;2&amp;#34; stroke-linecap=&amp;#34;round&amp;#34; stroke-linejoin=&amp;#34;round&amp;#34; class=&amp;#34;feather feather-github&amp;#34;&amp;gt;&amp;lt;path d=&amp;#34;M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22&amp;#34;&amp;gt;&amp;lt;/path&amp;gt;&amp;lt;/svg&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">url&lt;/span>: &lt;span style="color:#e6db74">&amp;#39;https://github.com/username/xxx&amp;#39;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">Dashboard&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">pre&lt;/span>: &amp;gt;-&lt;span style="color:#e6db74">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> &amp;lt;svg xmlns=&amp;#34;http://www.w3.org/2000/svg&amp;#34; width=&amp;#34;20&amp;#34; height=&amp;#34;20&amp;#34; viewBox=&amp;#34;0 0 24 24&amp;#34; fill=&amp;#34;none&amp;#34; stroke=&amp;#34;currentColor&amp;#34; stroke-width=&amp;#34;2&amp;#34; stroke-linecap=&amp;#34;round&amp;#34; stroke-linejoin=&amp;#34;round&amp;#34; class=&amp;#34;feather feather-box&amp;#34;&amp;gt;&amp;lt;path d=&amp;#34;M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z&amp;#34;&amp;gt;&amp;lt;/path&amp;gt;&amp;lt;polyline points=&amp;#34;3.27 6.96 12 12.01 20.73 6.96&amp;#34;&amp;gt;&amp;lt;/polyline&amp;gt;&amp;lt;line x1=&amp;#34;12&amp;#34; y1=&amp;#34;22.08&amp;#34; x2=&amp;#34;12&amp;#34; y2=&amp;#34;12&amp;#34;&amp;gt;&amp;lt;/line&amp;gt;&amp;lt;/svg&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">url&lt;/span>: &lt;span style="color:#e6db74">&amp;#39;https://xxx&amp;#39;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">languages&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">en&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">languageName&lt;/span>: &lt;span style="color:#ae81ff">EN&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">menu&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">main&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">Blog&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">url&lt;/span>: &lt;span style="color:#ae81ff">/blog&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">weight&lt;/span>: &lt;span style="color:#ae81ff">1&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">Tags&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">url&lt;/span>: &lt;span style="color:#ae81ff">/tags&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">weight&lt;/span>: &lt;span style="color:#ae81ff">2&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">Archive&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">url&lt;/span>: &lt;span style="color:#ae81ff">/archives&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">weight&lt;/span>: &lt;span style="color:#ae81ff">3&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">Guestbook&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">url&lt;/span>: &lt;span style="color:#ae81ff">/guestbook&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">weight&lt;/span>: &lt;span style="color:#ae81ff">4&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">Dashboard&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">url&lt;/span>: &lt;span style="color:#ae81ff">https://xxx&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">weight&lt;/span>: &lt;span style="color:#ae81ff">5&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">zh&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">languageName&lt;/span>: &lt;span style="color:#ae81ff">中&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">author&lt;/span>: &lt;span style="color:#ae81ff">Ladder 主题&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">authorDescription&lt;/span>: &lt;span style="color:#ae81ff">一个美观，快速并且专注于阅读的主题&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">info&lt;/span>: &lt;span style="color:#ae81ff">帮助开发者构建一个免费并且漂亮的博客网站，记录自己的思考并且提高自己的影响力&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">guestbook&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">title&lt;/span>: &lt;span style="color:#ae81ff">留言板&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">description&lt;/span>: &lt;span style="color:#ae81ff">您的评论，会让该网站更精彩！&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">menu&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">main&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">文章&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">url&lt;/span>: &lt;span style="color:#ae81ff">/blog&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">weight&lt;/span>: &lt;span style="color:#ae81ff">1&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">分类&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">url&lt;/span>: &lt;span style="color:#ae81ff">/tags&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">weight&lt;/span>: &lt;span style="color:#ae81ff">2&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">历史文章&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">url&lt;/span>: &lt;span style="color:#ae81ff">/archives&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">weight&lt;/span>: &lt;span style="color:#ae81ff">3&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">留言板&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">url&lt;/span>: &lt;span style="color:#ae81ff">/guestbook&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">weight&lt;/span>: &lt;span style="color:#ae81ff">4&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">网站统计&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">url&lt;/span>: &lt;span style="color:#ae81ff">https://xxx&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">weight&lt;/span>: &lt;span style="color:#ae81ff">5&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">taxonomies&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">series&lt;/span>: &lt;span style="color:#ae81ff">series&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">tag&lt;/span>: &lt;span style="color:#ae81ff">tags&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>
-&lt;/details>
-&lt;/p>
-&lt;h3 id="启动博客">启动博客&lt;/h3>
-&lt;p>首先我们找到根目录下 &lt;code>archetypes&lt;/code> 文件夹中的 &lt;code>default.md&lt;/code> 文件，用下面的文件替代其中内容。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-markdown" data-lang="markdown">&lt;span style="display:flex;">&lt;span>---
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>title:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>date: {{ .Date }}
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>tags: []
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>series: []
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>featured: true
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>---
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Here is summary.
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&amp;lt;!--more--&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>here is your content.
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>复制 &lt;code>themes/ladder/exampleSite/content&lt;/code> 里面的内容到自己的根目录的 &lt;code>content&lt;/code> 下面。&lt;/p>
-&lt;p>输入命令创建一篇名为 &lt;code>my-first-blog&lt;/code> 新的博客。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>hugo new blog/my-first-blog.md
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>创建后可以使用 &lt;code>hugo server -D&lt;/code> 来启动博客，并且在浏览器打开 &lt;code>http://localhost:1313/&lt;/code>，即可看到你的博客网站。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>hugo server -D
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="自定义配置">自定义配置&lt;/h2>
-&lt;h3 id="多语言支持">多语言支持&lt;/h3>
-&lt;p>首先我们需要确定我们博客默认使用的语言是哪种？是否需要多语言的支持？例如我们默认语言使用英文，那么 &lt;code>defaultContentLanguage&lt;/code> 即使用默认的 &lt;code>en&lt;/code>，假如默认使用中文就是 &lt;code>zh&lt;/code>。&lt;/p>
-&lt;p>除此之外，如果不需要多语言的支持，先将 &lt;code>params.options.enableMultiLang&lt;/code> 设置为 &lt;code>false&lt;/code>, 删除配置文件 &lt;code>languages&lt;/code> 配置下其它语言的配置即可。&lt;/p>
-&lt;p>上面的文件展示的是本博客使用的配置，多语言配置中默认语言是英文，可以切换成中文。&lt;/p>
-&lt;h3 id="修改基本信息">修改基本信息&lt;/h3>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yml" data-lang="yml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">baseURL&lt;/span>: &lt;span style="color:#e6db74">&amp;#39;https://hugo-ladder.pages.dev&amp;#39;&lt;/span> &lt;span style="color:#75715e">#修改为你的 https://username.github.io&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">homepage&lt;/span>: &lt;span style="color:#e6db74">&amp;#39;https://hugo-ladder.pages.dev&amp;#39;&lt;/span> &lt;span style="color:#75715e">#修改为你的 https://username.github.io&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">params&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">brand&lt;/span>: &lt;span style="color:#ae81ff">HOME&lt;/span> &lt;span style="color:#75715e"># 修改默认的为自己网站的标志&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">avatarURL&lt;/span>: &lt;span style="color:#ae81ff">/images/avatar.png&lt;/span> &lt;span style="color:#75715e">#网站主页的照片信息，你可以在根目录 /static/images/ 里面替换成自己的照片&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">author&lt;/span>: &lt;span style="color:#ae81ff">Hugo Ladder&lt;/span> &lt;span style="color:#75715e"># 修改你自己的名字&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">authorDescription&lt;/span>: &lt;span style="color:#75715e"># 修改对你自己的描述&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">info&lt;/span>: &lt;span style="color:#75715e"># 修改对你自己网站描述&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">favicon&lt;/span>: &lt;span style="color:#ae81ff">/images/avatar.png&lt;/span> &lt;span style="color:#75715e">#网站的 icon，你可以在根目录 /static/images/ 里面替换成自己的照片&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">options&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">showDarkMode&lt;/span>: &lt;span style="color:#66d9ef">true&lt;/span> &lt;span style="color:#75715e"># 是否支持黑暗模式&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">languages&lt;/span>: &lt;span style="color:#75715e"># 如果你启用多语言，下面是中文展示&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">zh&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">languageName&lt;/span>: &lt;span style="color:#ae81ff">中&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">author&lt;/span>: &lt;span style="color:#ae81ff">Ladder 主题&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">authorDescription&lt;/span>: &lt;span style="color:#ae81ff">一个美观，快速并且专注于阅读的主题&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">info&lt;/span>: &lt;span style="color:#ae81ff">帮助开发者构建一个免费并且漂亮的博客网站，记录自己的思考并且提高自己的影响力&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>你可以一边修改一边通过浏览器打开 &lt;code>http://localhost:1313/&lt;/code> 实时观看效果。&lt;/p>
-&lt;h3 id="导航栏">导航栏&lt;/h3>
-&lt;p>目前本博客支持 4 种默认的页面，即博客列表，标签分类，历史文章和留言板，&lt;/p>
-&lt;p>可以通过修改 &lt;code>menu.main&lt;/code> 来调整 &lt;code>名称&lt;/code> ，如果要添加新的页面或者修改 &lt;code>URL&lt;/code> 的话，记得在根目录的 &lt;code>content&lt;/code> 下面添加对应的 &lt;code>markdown&lt;/code> 文件。&lt;/p>
-&lt;h3 id="黑暗模式">黑暗模式&lt;/h3>
-&lt;p>本主题目前提供两种黑暗模式，一种是默认的 &lt;code>data-dark-mode&lt;/code> 模式，还有一种是 &lt;code>icy-dark-mode&lt;/code> 模式，可以通过修改 &lt;code>params.darkModeTheme&lt;/code> 的参数进行替换。大家可以自行探索，也欢迎贡献新的模式。&lt;/p>
-&lt;h3 id="社交图标">社交图标&lt;/h3>
-&lt;p>可以通过修改配置文件添加新的图标， &lt;code>params.social&lt;/code> 字段标明 &lt;code>名称&lt;/code>，&lt;code>图标&lt;/code>，&lt;code>自定义地址&lt;/code>，图标可以在这个网站找到 &lt;a href="https://feathericons.com/">feathericons.com&lt;/a>。&lt;/p>
-&lt;h2 id="内容管理">内容管理&lt;/h2>
-&lt;h3 id="文章管理">文章管理&lt;/h3>
-&lt;p>每一次写文章建议填写的配置（也可以不填），文章开头有这个几个字段，分别代表着&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-markdown" data-lang="markdown">&lt;span style="display:flex;">&lt;span>title:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>date: {{ .Date }}
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>tags: []
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>series: []
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>featured: true
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
-&lt;li>&lt;code>title&lt;/code> 文章题目&lt;/li>
-&lt;li>&lt;code>date&lt;/code> 发布日期&lt;/li>
-&lt;li>&lt;code>tags&lt;/code> 标签分类&lt;/li>
-&lt;li>&lt;code>series&lt;/code> 系列文章，会在下方推荐阅读中推荐同系列文章&lt;/li>
-&lt;li>&lt;code>featured&lt;/code> 是否在主页面中展示，&lt;code>true&lt;/code> or &lt;code>false&lt;/code>&lt;/li>
-&lt;/ul>
-&lt;h3 id="富文本功能">富文本功能&lt;/h3>
-&lt;p>目前博客默认集成 &lt;code>Toggle&lt;/code>和 &lt;code>Tab group&lt;/code> 两种富文本， &lt;code>Toggle&lt;/code> 的效果例如 &lt;a href="#%E9%85%8D%E7%BD%AE%E5%88%9D%E5%A7%8B%E5%8C%96">#配置初始化&lt;/a> 中可以隐藏代码或者文本， &lt;code>Tab group&lt;/code> 的效果例如在 &lt;a href="#%E5%AE%89%E8%A3%85">#安装Hugo&lt;/a> 中可以切换标签来写教程或文本。&lt;/p>
-&lt;p>除此之外，还有集成 &lt;code>youtube&lt;/code> &lt;code>twitter &lt;/code> 和 &lt;code>站点页面跳转&lt;/code> 等富文本功能。详细可以查看 &lt;a href="https://hugo-ladder.pages.dev/blog/tag-plugins/">rich content&lt;/a>。&lt;/p>
-&lt;p>我还新建了一个仓库 &lt;a href="https://github.com/guangzhengli/awesome-hugo-shortcodes">https://github.com/guangzhengli/awesome-hugo-shortcodes&lt;/a> ，用来收集 &lt;code>hugo shortcodes&lt;/code> ，大家可以去看看有没有自己需要的，可以自行添加。&lt;/p>
-&lt;h2 id="留言板和评论功能集成">留言板和评论功能集成&lt;/h2>
-&lt;p>本主题留言板和评论功能支持两种集成，一种是基于 &lt;a href="https://docs.github.com/en/issues">GitHub Issues&lt;/a> 的 &lt;a href="https://utteranc.es/">utteranc&lt;/a>，还有一种是基于&lt;a href="https://docs.github.com/en/discussions">GitHub Discussions&lt;/a> 的 &lt;a href="https://giscus.app/">giscus&lt;/a>。&lt;/p>
-&lt;p>这里推荐大家使用基于&lt;a href="https://docs.github.com/en/discussions">GitHub Discussions&lt;/a> 的 &lt;a href="https://giscus.app/">giscus&lt;/a>，毕竟 &lt;code>Issues&lt;/code> 是比较严肃的功能， &lt;a href="https://giscus.app/">giscus&lt;/a> 的页面也比较美观，还可以在同一话题下持续回复。&lt;/p>
-&lt;p>集成这两者的步骤都十分简单，只需要跟随 &lt;a href="https://utteranc.es/">utteranc&lt;/a> 和 &lt;a href="https://giscus.app/">giscus&lt;/a> 官方教程走到最后，生成对应的配置值，填入 &lt;code>params.comments&lt;/code> 里面对应的 &lt;code>giscus&lt;/code> &lt;code>utteranc&lt;/code> 即可，需要将另外的一个的 &lt;code>enable&lt;/code> 设置成 &lt;code>false&lt;/code>。&lt;/p>
-&lt;h2 id="网站数据统计功能">网站数据统计功能&lt;/h2>
-&lt;p>主题可以集成 &lt;a href="https://analytics.google.com/analytics/web/">Google analytics&lt;/a> 和 &lt;a href="https://umami.is/">umami&lt;/a> 两种网站数据统计能力。&lt;/p>
-&lt;p>&lt;a href="https://analytics.google.com/analytics/web/">Google analytics&lt;/a> 可以通过官方文档得到对应 &lt;code>G-xxx&lt;/code> 开头的 &lt;code>MEASUREMENT ID&lt;/code> ，填入配置文件中的 &lt;code>googleAnalytics&lt;/code> 即可。&lt;/p>
-&lt;p>&lt;a href="https://analytics.google.com/analytics/web/">Google analytics&lt;/a> 的集成简单和免费，不过缺点是无法做到隐私保护（对应数据会提供给 Google），页面也是比较笨重和缓慢。&lt;/p>
-&lt;p>所以大家如果有需求可以自己搭建 &lt;a href="https://umami.is/">umami&lt;/a> 来做数据统计，相关过程和步骤我放到另外的一篇博客 &lt;a href="https://proseguys.github.io/blog/how-to-integrate-umami-for-free-to-blog-site/">如何免费搭建的 umami&lt;/a>。&lt;/p>
-&lt;h2 id="seo">SEO&lt;/h2>
-&lt;p>&lt;code>SEO&lt;/code> 目前主题已经做了对应的优化，包括完善的 &lt;code>meta&lt;/code> 标签信息等。 除此之外，默认支持 &lt;a href="https://search.google.com/search-console">Google Search Console&lt;/a>，可以根据官方相关文档生成对应的 &lt;code>google-site-verification&lt;/code> ，填入对应的 &lt;code>params.analytics.google.SiteVerificationTag&lt;/code>。&lt;/p>
-&lt;h2 id="部署">部署&lt;/h2>
-&lt;p>关于部署也有多种方式，可以选择托管到 CDN 或者平台 &lt;a href="https://netlify.com/">Netlify&lt;/a>、&lt;a href="https://www.heroku.com/">Heroku&lt;/a>、&lt;a href="https://www.godaddy.com/">GoDaddy&lt;/a>、&lt;a href="https://www.dreamhost.com/">DreamHost&lt;/a>、&lt;a href="https://pages.github.com/">GitHub Pages&lt;/a>、&lt;a href="https://about.gitlab.com/features/pages/">GitLab Pages&lt;/a>、&lt;a href="https://surge.sh/">Surge&lt;/a>、&lt;a href="https://firebase.google.com/docs/hosting/">Firebase&lt;/a>、&lt;a href="https://cloud.google.com/storage/">Google Cloud Storage&lt;/a>、&lt;a href="https://aws.amazon.com/s3/">Amazon S3&lt;/a>、&lt;a href="https://www.rackspace.com/cloud/files">Rackspace&lt;/a>、&lt;a href="https://docs.microsoft.com/en-us/azure/storage/blobs/storage-blob-static-website">Azure&lt;/a>和 &lt;a href="https://aws.amazon.com/cloudfront/">CloudFront&lt;/a> 。&lt;/p>
-&lt;p>本文选择大家比较通用的 &lt;a href="https://pages.github.com/">GitHub Pages&lt;/a> 来作为教程。&lt;/p>
-&lt;h3 id="创建-githubhttpsgithubcom-账号">创建 &lt;a href="https://github.com/">GitHub&lt;/a> 账号&lt;/h3>
-&lt;p>在搭建自己的博客前，我们需要先注册一个 &lt;a href="https://github.com/">GitHub&lt;/a> 账号，这个账号的账户名非常重要，它是后面我们博客的域名地址。&lt;/p>
-&lt;p>例如我们创建的账号名称是 guangzhengli，那么我们最终的博客地址就是 &lt;a href="https://guangzhengli.github.io">https://guangzhengli.github.io&lt;/a>。&lt;/p>
-&lt;h3 id="创建-github-pages-仓库">创建 GitHub Pages 仓库&lt;/h3>
-&lt;p>完整的教程可以查看 &lt;a href="https://pages.github.com/">官方教程&lt;/a>，简单来讲就是 &lt;a href="https://github.com/new">创建一个新的 repository&lt;/a>，名字为 &lt;code>username.github.io&lt;/code>。&lt;/p>
-&lt;p>&lt;img src="https://cdn.jsdelivr.net/gh/guangzhengli/PicURL@master/uPic/j0eHDj.png" alt="j0eHDj">&lt;/p>
-&lt;h3 id="actions">Actions&lt;/h3>
-&lt;p>&lt;code>Actions&lt;/code> 方式用两种，一种是直接推送到 &lt;a href="https://pages.github.com/">GitHub Pages&lt;/a> ，还有一种是在 &lt;code>gh-pages&lt;/code> 分支上生成静态页面代码的方式。代码都在 &lt;a href="https://github.com/guangzhengli/hugo-ladder-exampleSite/tree/master/.github/workflows">https://github.com/guangzhengli/hugo-ladder-exampleSite/tree/master/.github/workflows&lt;/a> 这里。&lt;/p>
-&lt;p>如果你不是选择的直接克隆已经配置好的仓库： &lt;a href="https://github.com/guangzhengli/hugo-ladder-exampleSite">https://github.com/guangzhengli/hugo-ladder-exampleSite&lt;/a>。需要创建新的文件夹 &lt;code>.github/workflows&lt;/code> ，添加新的文件 &lt;code>gh-pages.yml&lt;/code> 文件。&lt;/p>
-&lt;p>{{ &lt;!-- raw HTML omitted -->}}&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yml" data-lang="yml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">generate github pages to gh-pages branch&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">on&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">push&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">branches&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">main&lt;/span> &lt;span style="color:#75715e">## Set a branch name to trigger deployment&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">jobs&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">deploy&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">runs-on&lt;/span>: &lt;span style="color:#ae81ff">ubuntu-20.04&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">steps&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#f92672">uses&lt;/span>: &lt;span style="color:#ae81ff">actions/checkout@v2&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">with&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">submodules&lt;/span>: &lt;span style="color:#66d9ef">true&lt;/span> &lt;span style="color:#75715e"># Fetch Hugo themes (true OR recursive)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">fetch-depth&lt;/span>: &lt;span style="color:#ae81ff">0&lt;/span> &lt;span style="color:#75715e"># Fetch all history for .GitInfo and .Lastmod&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">Setup Hugo&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">uses&lt;/span>: &lt;span style="color:#ae81ff">peaceiris/actions-hugo@v2&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">with&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">hugo-version&lt;/span>: &lt;span style="color:#e6db74">&amp;#39;latest&amp;#39;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">extended&lt;/span>: &lt;span style="color:#66d9ef">true&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">Build&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">run&lt;/span>: &lt;span style="color:#ae81ff">hugo --minify&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">Deploy&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">uses&lt;/span>: &lt;span style="color:#ae81ff">peaceiris/actions-gh-pages@v3&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># If you&amp;#39;re changing the branch from main, &lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># also change the `main` in `refs/heads/main` &lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># below accordingly.&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">if&lt;/span>: &lt;span style="color:#ae81ff">github.ref == &amp;#39;refs/heads/main&amp;#39;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">with&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">github_token&lt;/span>: &lt;span style="color:#ae81ff">${{ secrets.GITHUB_TOKEN }}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">publish_dir&lt;/span>: &lt;span style="color:#ae81ff">./public&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>{{ &lt;!-- raw HTML omitted --> }}&lt;/p>
-&lt;h3 id="部署-github-pages">部署 GitHub Pages&lt;/h3>
-&lt;p>在你项目的根目录下输入以下命令：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>git remote add origin https://github.com/username/username.github.io.git
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git add .
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git commit -m &lt;span style="color:#e6db74">&amp;#34;feat: init blog site&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git push origin main
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>确保我们推送成功后，我们会在 &lt;code>Actions&lt;/code> 中自动的将代码 build 成 GitHub Pages 需要的文件，可以到这个地址检查 &lt;code>workflow&lt;/code> 是否成功运行。注意将地址中 &lt;code>username&lt;/code> 替换成自己的账号名称。&lt;code>https://github.com/username/username.github.io/actions&lt;/code>。&lt;/p>
-&lt;p>如果 &lt;code>Actions&lt;/code> 运行成功的话，我们会有一个新的分支叫做 &lt;code>gh-pages&lt;/code>。这时候我们去仓库的设置中心 &lt;code>Settings&lt;/code> ，选择 &lt;code>Pages&lt;/code> ，之后将 &lt;code>Build and deployment&lt;/code> -&amp;gt; &lt;code>Source&lt;/code> 选择 &lt;code>Deploy from a branch&lt;/code>。后面的 &lt;code>Branch&lt;/code> 选择 &lt;code>gh-pages&lt;/code> 即可配置成功。&lt;/p>
-&lt;p>&lt;img src="https://cdn.jsdelivr.net/gh/guangzhengli/PicURL@master/uPic/nsrExo.png" alt="nsrExo">&lt;/p>
-&lt;p>这个时候，选择上方的 &lt;code>Visit site&lt;/code> 或者手动输入 &lt;code>https://username.github.io&lt;/code> 即可访问成功！ 🎉🎉🎉&lt;/p>
-&lt;p>如果部署时，有任何问题，可以在下方留言。&lt;/p>
-&lt;p>原文链接: &lt;a href="https://guangzhengli.com/zh/blog/zh/how-to-create-your-blog-for-free-by-hugo-ladder-in-30min/">https://guangzhengli.com/zh/blog/zh/how-to-create-your-blog-for-free-by-hugo-ladder-in-30min/&lt;/a>&lt;/p>
-&lt;!-- raw HTML omitted -->
-&lt;!-- raw HTML omitted --></description></item><item><title>如何 10 分钟快速搭建你自己的独立博客</title><link>https://proseguys.github.io/blog/how-to-create-your-blog-for-free-in-10min/</link><pubDate>Mon, 01 Aug 2022 00:00:00 +0000</pubDate><guid>https://proseguys.github.io/blog/how-to-create-your-blog-for-free-in-10min/</guid><description>&lt;p>本文是如何搭建免费的独立博客系列的第一篇，也将教大家如何快速的使用 &lt;a href="https://pages.github.com/">GitHub Pages&lt;/a> 的功能来搭建属于自己的博客。&lt;/p>
-&lt;p>本篇文章属于快速入门版，可以帮助大家快速搭建和观察效果。如果是了解更多关于 &lt;a href="https://github.com/guangzhengli/hugo-theme-ladder">hugo-ladder&lt;/a> 的内容，建议跟随这篇文章来搭建 &lt;a href="https://proseguys.github.io/blog/how-to-create-your-blog-for-free-by-hugo-ladder-in-30min/">如何 30 分钟搭建一套完整独立博客&lt;/a>。&lt;/p>
-&lt;h2 id="准备工作">准备工作&lt;/h2>
-&lt;h3 id="创建-githubhttpsgithubcom-账号">创建 &lt;a href="https://github.com/">GitHub&lt;/a> 账号&lt;/h3>
-&lt;p>在搭建自己的博客前，我们需要先注册一个 &lt;a href="https://github.com/">GitHub&lt;/a> 账号，这个账号的账户名非常重要，它是后面我们博客的域名地址。&lt;/p>
-&lt;p>例如我们创建的账号名称是 guangzhengli，那么我们最终的博客地址就是 &lt;a href="https://guangzhengli.github.io">https://guangzhengli.github.io&lt;/a>。&lt;/p>
-&lt;h3 id="创建-github-pages-仓库">创建 GitHub Pages 仓库&lt;/h3>
-&lt;p>完整的教程可以查看 &lt;a href="https://pages.github.com/">官方教程&lt;/a>，简单来讲就是 &lt;a href="https://github.com/new">创建一个新的 repository&lt;/a>，名字为 &lt;code>username.github.io&lt;/code>。&lt;/p>
-&lt;p>&lt;img src="https://cdn.jsdelivr.net/gh/guangzhengli/PicURL@master/uPic/j0eHDj.png" alt="j0eHDj">&lt;/p>
-&lt;h2 id="搭建博客">搭建博客&lt;/h2>
-&lt;p>我们可以选择直接克隆已经准备好的仓库 &lt;a href="https://github.com/guangzhengli/hugo-ladder-exampleSite">hugo-ladder-exampleSite&lt;/a>&lt;/p>
-&lt;pre tabindex="0">&lt;code>git clone https://github.com/guangzhengli/hugo-ladder-exampleSite.git
-&lt;/code>&lt;/pre>&lt;p>在拉取完代码后，我们需要修改配置信息，文件在根目录的 &lt;code>config.yml&lt;/code> 文件中，我们需要将 Demo 的配置修改成自己。&lt;/p>
-&lt;blockquote>
-&lt;p>请注意，一定记得修改配置信息，特别是拉取博客后大家会像评论配置等，否则将会给后续使用改教程的人带来困扰，谢谢🙏。如果想搭建自己独立的评论系统，可以参考这篇文章来搭建 &lt;a href="https://proseguys.github.io/blog/how-to-create-your-blog-for-free-by-hugo-ladder-in-30min/">如何 30 分钟搭建一套完整独立博客&lt;/a>。&lt;/p>
-&lt;/blockquote>
-&lt;h3 id="修改博客配置">修改博客配置&lt;/h3>
-&lt;p>根目录的 &lt;code>config.yml&lt;/code> 文件，使用编辑器打开，修改如下大致的一些配置&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yml" data-lang="yml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">baseURL&lt;/span>: &lt;span style="color:#e6db74">&amp;#39;https://hugo-ladder.pages.dev&amp;#39;&lt;/span> &lt;span style="color:#75715e">#修改为你的 https://username.github.io&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">homepage&lt;/span>: &lt;span style="color:#e6db74">&amp;#39;https://hugo-ladder.pages.dev&amp;#39;&lt;/span> &lt;span style="color:#75715e">#修改为你的 https://username.github.io&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">defaultContentLanguage&lt;/span>: &lt;span style="color:#e6db74">&amp;#39;en&amp;#39;&lt;/span> &lt;span style="color:#75715e">#修改默认语言，例如改为 zh 即默认使用中文&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">params&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">brand&lt;/span>: &lt;span style="color:#ae81ff">HOME&lt;/span> &lt;span style="color:#75715e"># 修改默认的为自己网站的标志&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">avatarURL&lt;/span>: &lt;span style="color:#ae81ff">/images/avatar.png&lt;/span> &lt;span style="color:#75715e">#网站主页的照片信息，你可以在根目录 /static/images/ 里面替换成自己的照片&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">author&lt;/span>: &lt;span style="color:#ae81ff">Hugo Ladder&lt;/span> &lt;span style="color:#75715e"># 修改你自己的名字&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">authorDescription&lt;/span>: &lt;span style="color:#75715e"># 修改对你自己的描述&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">info&lt;/span>: &lt;span style="color:#75715e"># 修改对你自己网站描述&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">favicon&lt;/span>: &lt;span style="color:#ae81ff">/images/avatar.png&lt;/span> &lt;span style="color:#75715e">#网站的 icon，你可以在根目录 /static/images/ 里面替换成自己的照片&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">options&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">showDarkMode&lt;/span>: &lt;span style="color:#66d9ef">true&lt;/span> &lt;span style="color:#75715e"># 是否使用切换黑暗模式&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">enableMultiLang&lt;/span>: &lt;span style="color:#66d9ef">true&lt;/span> &lt;span style="color:#75715e"># 是否展示多语言选择&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">languages&lt;/span>: &lt;span style="color:#75715e"># 如果你启用多语言，下面是中文展示&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">zh&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">languageName&lt;/span>: &lt;span style="color:#ae81ff">中&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">author&lt;/span>: &lt;span style="color:#ae81ff">Ladder 主题&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">authorDescription&lt;/span>: &lt;span style="color:#ae81ff">一个美观，快速并且专注于阅读的主题&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">info&lt;/span>: &lt;span style="color:#ae81ff">帮助开发者构建一个免费并且漂亮的博客网站，记录自己的思考并且提高自己的影响力&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="注释评论相关功能">注释评论相关功能&lt;/h3>
-&lt;p>准备好的仓库 &lt;a href="https://github.com/guangzhengli/hugo-ladder-exampleSite">hugo-ladder-exampleSite&lt;/a> 主要给大家快速搭建使用。如果大家都使用同一套评论配置的话，会给后续使用该教程的人带来一定的困扰，可以先将相关功能注释掉。如果想搭建自己独立的评论系统，可以参考这篇文章来搭建 &lt;a href="https://proseguys.github.io/blog/how-to-create-your-blog-for-free-by-hugo-ladder-in-30min/">如何 30 分钟搭建一套完整独立博客&lt;/a>。&lt;/p>
-&lt;p>修改方案如下所示&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yml" data-lang="yml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">comments&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">giscus&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">enable&lt;/span>: &lt;span style="color:#66d9ef">true&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>改为如下所示&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yml" data-lang="yml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">comments&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">giscus&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">enable&lt;/span>: &lt;span style="color:#66d9ef">false&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="如何添加和修改自己的博客文章">如何添加和修改自己的博客文章&lt;/h2>
-&lt;p>可以在根目录的 &lt;code>content/blog&lt;/code> 中找到该站点的 Demo 展示文章，可以选择新增一个 &lt;code>markdown&lt;/code> 文件添加自己想要表达的内容即可。&lt;/p>
-&lt;p>目前在文章头部，需要添加上这几个标签来配置文章的展示：&lt;/p>
+&lt;h3 id="pdfplumber">pdfplumber&lt;/h3>
+&lt;p>**文档地址：**&lt;a href="https://github.com/jsvine/pdfplumber">https://github.com/jsvine/pdfplumber&lt;/a>&lt;/p>
+&lt;p>**简介：**查看PDF文件以获取有关每个文本字符、矩形和线条的详细信息。并具有表格提取和可视化调试能力，基于pdfminer.six&lt;/p>
+&lt;p>**测试结果：**根据PDF的单页作为内容操作的基本单位，只支持获取纯文本信息，根据段落结构获取方式不成熟，以下为测试结果&lt;/p>
 &lt;ul>
-&lt;li>&lt;code>title&lt;/code>：文章标题。&lt;/li>
-&lt;li>&lt;code>date&lt;/code>: 发布时间。&lt;/li>
-&lt;li>&lt;code>tags&lt;/code>: 文章的标签，便于后续检索和查找类似文章。&lt;/li>
-&lt;li>&lt;code>series&lt;/code>: 系列文章，可以为空，便于在文章末尾相关文章推荐使用。&lt;/li>
-&lt;li>&lt;code>featured&lt;/code>: &lt;code>true&lt;/code> 或者 &lt;code>false&lt;/code>，是否在主页推荐中展示。&lt;/li>
+&lt;li>直接文字提取&lt;/li>
 &lt;/ul>
-&lt;p>其次，可以通过添加 &lt;code>&amp;lt;!--more--&amp;gt;&lt;/code> 标签，标明哪些文字需要在博客的列表中外部展示用，哪些文字需要隐藏，如果不添加的话，会默认展示一定的字数。&lt;/p>
-&lt;h2 id="部署代码">部署代码&lt;/h2>
-&lt;h3 id="推送代码到自己的仓库">推送代码到自己的仓库&lt;/h3>
-&lt;p>在第一步时，我们创建了名为 &lt;code>username.github.io&lt;/code> 的仓库地址，可以使用下面命令先将指向仓库 &lt;a href="https://github.com/guangzhengli/hugo-ladder-exampleSite">hugo-ladder-exampleSite&lt;/a> 的远程 URL 先去除，再添加自己的地址。注意将下面命令中 &lt;code>username&lt;/code> 替换成自己的账号名称。&lt;/p>
-&lt;p>最后我们再推送我们的修改到自己的仓库。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>git remote remove origin
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> pdfplumber
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git remote add origin https://github.com/username/username.github.io.git
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">def&lt;/span> &lt;span style="color:#a6e22e">pdf_to_markdown&lt;/span>(pdf_path: str):
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git add .
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># 使用 pdfplumber 打开 PDF 文件&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">with&lt;/span> pdfplumber&lt;span style="color:#f92672">.&lt;/span>open(pdf_path) &lt;span style="color:#66d9ef">as&lt;/span> pdf:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> page &lt;span style="color:#f92672">in&lt;/span> pdf&lt;span style="color:#f92672">.&lt;/span>pages:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># 提取每页的 HTML 内容, &lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> context &lt;span style="color:#f92672">=&lt;/span> page&lt;span style="color:#f92672">.&lt;/span>extract_text()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> print(context)
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git commit -m &lt;span style="color:#e6db74">&amp;#34;feat: init blog site&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>pdf_to_markdown(&lt;span style="color:#e6db74">&amp;#34;pdf_test/test.pdf&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;img src="https://proseguys.github.io/images/pdf_extractor_report/Untitled.png" alt="Untitled">&lt;/p>
+&lt;p>丢失文件段落结构，标题正文无法区分。&lt;/p>
+&lt;ul>
+&lt;li>段落结构获取(实验阶段)&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> pdfplumber
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git push origin main
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="部署-github-pages">部署 GitHub Pages&lt;/h3>
-&lt;p>确保我们推送成功后，我们会在 &lt;code>Actions&lt;/code> 中自动的将代码 build 成 GitHub Pages 需要的文件，可以到这个地址检查 &lt;code>workflow&lt;/code> 是否成功运行。注意将地址中 &lt;code>username&lt;/code> 替换成自己的账号名称。&lt;code>https://github.com/username/username.github.io/actions&lt;/code>。&lt;/p>
-&lt;p>如果 &lt;code>Actions&lt;/code> 运行成功的话，我们会有一个新的分支叫做 &lt;code>gh-pages&lt;/code>。这时候我们去仓库的设置中心 &lt;code>Settings&lt;/code> ，选择 &lt;code>Pages&lt;/code> ，之后将 &lt;code>Build and deployment&lt;/code> -&amp;gt; &lt;code>Source&lt;/code> 选择 &lt;code>Deploy from a branch&lt;/code>。后面的 &lt;code>Branch&lt;/code> 选择 &lt;code>gh-pages&lt;/code> 即可配置成功。&lt;/p>
-&lt;p>&lt;img src="https://cdn.jsdelivr.net/gh/guangzhengli/PicURL@master/uPic/nsrExo.png" alt="nsrExo">&lt;/p>
-&lt;p>这个时候，选择上方的 &lt;code>Visit site&lt;/code> 或者手动输入 &lt;code>https://username.github.io&lt;/code> 即可访问成功！ 🎉🎉🎉&lt;/p>
-&lt;p>如果部署时，有任何问题，可以在下方留言。&lt;/p>
-&lt;p>原文链接: &lt;a href="https://guangzhengli.com/blog/how-to-create-your-blog-for-free-in-10min">https://guangzhengli.com/blog/how-to-create-your-blog-for-free-in-10min&lt;/a>&lt;/p></description></item><item><title>Rich Content</title><link>https://proseguys.github.io/blog/rich-content/</link><pubDate>Mon, 18 Jul 2022 20:29:08 +0000</pubDate><guid>https://proseguys.github.io/blog/rich-content/</guid><description>&lt;h2 id="figure">figure&lt;/h2>
-&lt;h2 id="ref-in-posts">ref in posts&lt;/h2>
-&lt;p>&lt;a href="https://proseguys.github.io/blog/how-to-create-your-blog-for-free-by-hugo-ladder-in-30min/">Neat&lt;/a>&lt;/p>
-&lt;h2 id="hide-toggle">hide toggle&lt;/h2>
-&lt;p>
-&lt;details class="toggle">
-&lt;summary markdown="span">summary&lt;/summary>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>hide value
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>
-&lt;/details>
-&lt;/p>
-&lt;h3 id="without-summary">without summary&lt;/h3>
-&lt;p>
-&lt;details class="toggle">
-&lt;summary markdown="span">Toggle&lt;/summary>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>hide value
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>
-&lt;/details>
-&lt;/p>
-&lt;h2 id="tab-group-code">tab group code&lt;/h2>
-&lt;div class="tabs tabs-left">
-&lt;style>
-.tabs input#tab-0-0:checked ~ .tab-content-0-0 {
-display: block;
-}
-&lt;/style>
-&lt;input type="radio" class="tab-input" name="tab-select-0" id="tab-0-0" checked/>
-&lt;label for="tab-0-0" class="tab-label">Hello&lt;/label>
-&lt;div class="tab-content tab-content-0-0">
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>Hello World!
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>
-&lt;/div>
-&lt;style>
-.tabs input#tab-0-1:checked ~ .tab-content-0-1 {
-display: block;
-}
-&lt;/style>
-&lt;input type="radio" class="tab-input" name="tab-select-0" id="tab-0-1" />
-&lt;label for="tab-0-1" class="tab-label">Goodbye&lt;/label>
-&lt;div class="tab-content tab-content-0-1">
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>Goodbye Everybody!
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>
-&lt;/div>
-&lt;/div>
-&lt;h2 id="tab-group">tab group&lt;/h2>
-&lt;div class="tabs tabs-left">
-&lt;style>
-.tabs input#tab-1-0:checked ~ .tab-content-1-0 {
-display: block;
-}
-&lt;/style>
-&lt;input type="radio" class="tab-input" name="tab-select-1" id="tab-1-0" checked/>
-&lt;label for="tab-1-0" class="tab-label">MacOS&lt;/label>
-&lt;div class="tab-content tab-content-1-0">
-brew install hugo
-&lt;/div>
-&lt;style>
-.tabs input#tab-1-1:checked ~ .tab-content-1-1 {
-display: block;
-}
-&lt;/style>
-&lt;input type="radio" class="tab-input" name="tab-select-1" id="tab-1-1" />
-&lt;label for="tab-1-1" class="tab-label">Linux&lt;/label>
-&lt;div class="tab-content tab-content-1-1">
-apt install hugo
-&lt;/div>
-&lt;style>
-.tabs input#tab-1-2:checked ~ .tab-content-1-2 {
-display: block;
-}
-&lt;/style>
-&lt;input type="radio" class="tab-input" name="tab-select-1" id="tab-1-2" />
-&lt;label for="tab-1-2" class="tab-label">Window&lt;/label>
-&lt;div class="tab-content tab-content-1-2">
-window install hugo
-&lt;/div>
-&lt;/div></description></item><item><title>Code Highlight Style test</title><link>https://proseguys.github.io/blog/code-highlight/</link><pubDate>Thu, 25 Jul 2019 16:43:00 +0000</pubDate><guid>https://proseguys.github.io/blog/code-highlight/</guid><description>&lt;p>Make sure all the code blocks highlighted correctly. All the code samples are come from the demo of &lt;a href="https://highlightjs.org">https://highlightjs.org&lt;/a>&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-plain" data-lang="plain">&lt;span style="display:flex;">&lt;span>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&amp;#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-rust" data-lang="rust">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#[derive(Debug)]&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">pub&lt;/span> &lt;span style="color:#66d9ef">enum&lt;/span> &lt;span style="color:#a6e22e">State&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Start,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Transient,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Closed,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">def&lt;/span> &lt;span style="color:#a6e22e">pdf_to_markdown&lt;/span>(pdf_path: str):
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">impl&lt;/span> From&lt;span style="color:#f92672">&amp;lt;&amp;amp;&lt;/span>&lt;span style="color:#a6e22e">&amp;#39;a&lt;/span> &lt;span style="color:#66d9ef">str&lt;/span>&lt;span style="color:#f92672">&amp;gt;&lt;/span> &lt;span style="color:#66d9ef">for&lt;/span> State {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">fn&lt;/span> &lt;span style="color:#a6e22e">from&lt;/span>(s: &lt;span style="color:#66d9ef">&amp;amp;&lt;/span>&lt;span style="color:#a6e22e">&amp;#39;a&lt;/span> &lt;span style="color:#66d9ef">str&lt;/span>) -&amp;gt; &lt;span style="color:#a6e22e">Self&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">match&lt;/span> s {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;start&amp;#34;&lt;/span> &lt;span style="color:#f92672">=&amp;gt;&lt;/span> State::Start,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;closed&amp;#34;&lt;/span> &lt;span style="color:#f92672">=&amp;gt;&lt;/span> State::Closed,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> _ &lt;span style="color:#f92672">=&amp;gt;&lt;/span> unreachable!(),
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>[
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;title&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;apples&amp;#34;&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;count&amp;#34;&lt;/span>: [&lt;span style="color:#ae81ff">12000&lt;/span>, &lt;span style="color:#ae81ff">20000&lt;/span>],
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;description&amp;#34;&lt;/span>: {&lt;span style="color:#f92672">&amp;#34;text&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;...&amp;#34;&lt;/span>, &lt;span style="color:#f92672">&amp;#34;sensitive&amp;#34;&lt;/span>: &lt;span style="color:#66d9ef">false&lt;/span>}
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> },
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;title&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;oranges&amp;#34;&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;count&amp;#34;&lt;/span>: [&lt;span style="color:#ae81ff">17500&lt;/span>, &lt;span style="color:#66d9ef">null&lt;/span>],
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;description&amp;#34;&lt;/span>: {&lt;span style="color:#f92672">&amp;#34;text&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;...&amp;#34;&lt;/span>, &lt;span style="color:#f92672">&amp;#34;sensitive&amp;#34;&lt;/span>: &lt;span style="color:#66d9ef">false&lt;/span>}
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>]
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">@requires_authorization&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">def&lt;/span> &lt;span style="color:#a6e22e">somefunc&lt;/span>(param1&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#39;&amp;#39;&lt;/span>, param2&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">0&lt;/span>):
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">r&lt;/span>&lt;span style="color:#e6db74">&amp;#39;&amp;#39;&amp;#39;A docstring&amp;#39;&amp;#39;&amp;#39;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> param1 &lt;span style="color:#f92672">&amp;gt;&lt;/span> param2: &lt;span style="color:#75715e"># interesting&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> print &lt;span style="color:#e6db74">&amp;#39;Gre&lt;/span>&lt;span style="color:#ae81ff">\&amp;#39;&lt;/span>&lt;span style="color:#e6db74">ater&amp;#39;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> (param2 &lt;span style="color:#f92672">-&lt;/span> param1 &lt;span style="color:#f92672">+&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span> &lt;span style="color:#f92672">+&lt;/span> &lt;span style="color:#ae81ff">0b10&lt;/span>l) &lt;span style="color:#f92672">or&lt;/span> &lt;span style="color:#66d9ef">None&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># 使用 pdfplumber 打开 PDF 文件&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">with&lt;/span> pdfplumber&lt;span style="color:#f92672">.&lt;/span>open(pdf_path) &lt;span style="color:#66d9ef">as&lt;/span> pdf:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> page &lt;span style="color:#f92672">in&lt;/span> pdf&lt;span style="color:#f92672">.&lt;/span>pages:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># 提取每页的 HTML 内容&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> context &lt;span style="color:#f92672">=&lt;/span> page&lt;span style="color:#f92672">.&lt;/span>extract_text(layout&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#66d9ef">True&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> print(context)
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">class&lt;/span> &lt;span style="color:#a6e22e">SomeClass&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">pass&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>pdf_to_markdown(&lt;span style="color:#e6db74">&amp;#34;pdf_test/test.pdf&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;img src="https://proseguys.github.io/images/pdf_extractor_report/Untitled%201.png" alt="Untitled">&lt;/p>
+&lt;p>丢失标题结构，且增加对应换行符，增加后续解析难度&lt;/p>
+&lt;h3 id="pdfminersix">&lt;strong>pdfminer.six&lt;/strong>&lt;/h3>
+&lt;p>&lt;strong>文档地址：&lt;/strong> &lt;a href="https://pdfminersix.readthedocs.io/en/latest/">https://pdfminersix.readthedocs.io/en/latest/&lt;/a>&lt;/p>
+&lt;p>&lt;strong>简介：&lt;/strong> Pdfminer.6 是社区维护的原始 PDFMiner 的分支。它是一个从PDF文档中提取信息的工具。它专注于获取和分析文本数据。 Pdfminer.6 直接从 PDF 源代码中提取页面文本。它还可用于获取文本的确切位置、字体或颜色。&lt;/p>
+&lt;p>&lt;strong>测试结果：&lt;/strong> 通过&lt;code>extract_text&lt;/code> 方法直接获取整页PDF的文本信息，丢失文本层级结构&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">from&lt;/span> pdfminer.high_level &lt;span style="color:#f92672">import&lt;/span> extract_text
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">&amp;gt;&amp;gt;&amp;gt;&lt;/span> message &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#39;&amp;#39;&amp;#39;interpreter
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">... prompt&amp;#39;&amp;#39;&amp;#39;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-html" data-lang="html">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&amp;lt;!DOCTYPE html&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&amp;lt;&lt;span style="color:#f92672">title&lt;/span>&amp;gt;Title&amp;lt;/&lt;span style="color:#f92672">title&lt;/span>&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">def&lt;/span> &lt;span style="color:#a6e22e">pdf_to_markdown&lt;/span>(pdf_path: str):
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&amp;lt;&lt;span style="color:#f92672">style&lt;/span>&amp;gt;&lt;span style="color:#f92672">body&lt;/span> {&lt;span style="color:#66d9ef">width&lt;/span>: &lt;span style="color:#ae81ff">500&lt;/span>&lt;span style="color:#66d9ef">px&lt;/span>;}&amp;lt;/&lt;span style="color:#f92672">style&lt;/span>&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> text &lt;span style="color:#f92672">=&lt;/span> extract_text(pdf_path)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">with&lt;/span> open(&lt;span style="color:#e6db74">&amp;#34;./page.txt&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;w&amp;#34;&lt;/span>) &lt;span style="color:#66d9ef">as&lt;/span> f:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> f&lt;span style="color:#f92672">.&lt;/span>write(text)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> print(text)
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&amp;lt;&lt;span style="color:#f92672">script&lt;/span> &lt;span style="color:#a6e22e">type&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;application/javascript&amp;#34;&lt;/span>&amp;gt;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">function&lt;/span> &lt;span style="color:#a6e22e">$init&lt;/span>() {&lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#66d9ef">true&lt;/span>;}
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&amp;lt;/&lt;span style="color:#f92672">script&lt;/span>&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>pdf_to_markdown(&lt;span style="color:#e6db74">&amp;#34;pdf_test/test.pdf&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;img src="https://proseguys.github.io/images/pdf_extractor_report/Untitled%202.png" alt="Untitled">&lt;/p>
+&lt;p>丢失部分PDF文档结构，丢失标题层级&lt;/p>
+&lt;h3 id="pymupdf">PyMuPDF&lt;/h3>
+&lt;p>&lt;strong>文档地址：&lt;/strong> &lt;a href="https://pymupdf.readthedocs.io/en/latest/tutorial.html">https://pymupdf.readthedocs.io/en/latest/tutorial.html&lt;/a>&lt;/p>
+&lt;p>&lt;strong>简介：&lt;/strong> 高性能python库，用于PDF的数据提取、分析、转换和操作。&lt;/p>
+&lt;p>PyMuPDF Pro还支持 office文件的支持，包括：&lt;/p>
+&lt;ul>
+&lt;li>DOC/DOCX 文档/文档CX&lt;/li>
+&lt;li>PPT/PPTX&lt;/li>
+&lt;li>XLS/XLSX&lt;/li>
+&lt;li>HWP/HWPX&lt;/li>
+&lt;/ul>
+&lt;p>模块基础单元为Document实例，用户可以通过PyMuPDF打开文件，获取Document实例。Document包含许多属性和功能。其中包括元信息（如“作者”或“主题”）、总页数、大纲和加密信息。&lt;/p>
+&lt;p>页面处理是PyMuPDF功能的核心，用户可以通过Document作为Page的迭代器，通过循环获取不同的Page。&lt;/p>
+&lt;p>用户可以通过不同形式和详细程度提取页面的所有文本、图像和其他信息。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>text &lt;span style="color:#f92672">=&lt;/span> page&lt;span style="color:#f92672">.&lt;/span>get_text(opt)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>使用一下option选项获取不同的格式：&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>“text”&lt;/strong> ：（默认）带有换行符的纯文本。没有格式、没有文本位置详细信息、没有图像。&lt;/li>
+&lt;li>&lt;strong>“blocks”&lt;/strong> ：生成文本块（=段落）列表。&lt;/li>
+&lt;li>&lt;strong>“words”&lt;/strong> ：生成单词列表（不包含空格的字符串）。&lt;/li>
+&lt;li>&lt;strong>“html”&lt;/strong> ：创建页面的完整视觉版本，包括任何图像。这可以通过您的互联网浏览器显示。&lt;/li>
+&lt;li>&lt;strong>“dict”&lt;/strong> / &lt;strong>“json”&lt;/strong> ：与 HTML 相同的信息级别，但以 Python 字典或 resp 形式提供。 JSON 字符串。有关其结构的详细信息，请参阅&lt;a href="https://pymupdf.readthedocs.io/en/latest/textpage.html#TextPage.extractDICT">&lt;code>TextPage.extractDICT()&lt;/code>&lt;/a> 。&lt;/li>
+&lt;li>&lt;strong>“rawdict”&lt;/strong> / &lt;strong>“rawjson”&lt;/strong> ： &lt;strong>“dict”&lt;/strong> / **“json”**的超集。它还提供诸如 XML 之类的字符详细信息。有关其结构的详细信息，请参阅&lt;a href="https://pymupdf.readthedocs.io/en/latest/textpage.html#TextPage.extractRAWDICT">&lt;code>TextPage.extractRAWDICT()&lt;/code>&lt;/a> 。&lt;/li>
+&lt;li>&lt;strong>“xhtml”&lt;/strong> ：文本信息级别为TEXT版本，但包含图像。也可以通过互联网浏览器显示。&lt;/li>
+&lt;li>&lt;strong>“xml”&lt;/strong> ：不包含图像，但包含完整的位置和字体信息，具体到每个文本字符。使用 XML 模块进行解释。&lt;/li>
+&lt;/ul>
+&lt;p>PyMuPDF支持使用story类通过html源生成PDF，并用于解析。然而并不提供直接通过Stroy实例转换成Document实例的方法。story类相关文档：https://pymupdf.readthedocs.io/en/latest/recipes-stories.html#stories&lt;/p>
+&lt;p>&lt;strong>测试结果：&lt;/strong> 根据PDF的单页作为内容操作的基本单位，保留文件结构，并提供文件大纲进行标题区分，可以通过大纲和文本内容区分相关结构，以下为测试结果&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>doc&lt;span style="color:#f92672">.&lt;/span>get_toc() &lt;span style="color:#75715e"># 获取Document的大纲信息&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;img src="https://proseguys.github.io/images/pdf_extractor_report/Untitled%203.png" alt="Untitled">&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> pymupdf
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&amp;lt;&lt;span style="color:#f92672">body&lt;/span>&amp;gt;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;lt;&lt;span style="color:#f92672">p&lt;/span> &lt;span style="color:#a6e22e">checked&lt;/span> &lt;span style="color:#a6e22e">class&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;title&amp;#34;&lt;/span> &lt;span style="color:#a6e22e">id&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#39;title&amp;#39;&lt;/span>&amp;gt;Title&amp;lt;/&lt;span style="color:#f92672">p&lt;/span>&amp;gt;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">&amp;lt;!-- here goes the rest of the page --&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&amp;lt;/&lt;span style="color:#f92672">body&lt;/span>&amp;gt;
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">function&lt;/span> &lt;span style="color:#a6e22e">$initHighlight&lt;/span>(&lt;span style="color:#a6e22e">block&lt;/span>, &lt;span style="color:#a6e22e">cls&lt;/span>) {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">try&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> (&lt;span style="color:#a6e22e">cls&lt;/span>.&lt;span style="color:#a6e22e">search&lt;/span>(&lt;span style="color:#e6db74">/\bno\-highlight\b/&lt;/span>) &lt;span style="color:#f92672">!=&lt;/span> &lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#a6e22e">process&lt;/span>(&lt;span style="color:#a6e22e">block&lt;/span>, &lt;span style="color:#66d9ef">true&lt;/span>, &lt;span style="color:#ae81ff">0x0F&lt;/span>) &lt;span style="color:#f92672">+&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">` class=&amp;#34;&lt;/span>&lt;span style="color:#e6db74">${&lt;/span>&lt;span style="color:#a6e22e">cls&lt;/span>&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">&amp;#34;`&lt;/span>;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> } &lt;span style="color:#66d9ef">catch&lt;/span> (&lt;span style="color:#a6e22e">e&lt;/span>) {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">/* handle exception */&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> (&lt;span style="color:#66d9ef">var&lt;/span> &lt;span style="color:#a6e22e">i&lt;/span> &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span> &lt;span style="color:#f92672">/&lt;/span> &lt;span style="color:#ae81ff">2&lt;/span>; &lt;span style="color:#a6e22e">i&lt;/span> &lt;span style="color:#f92672">&amp;lt;&lt;/span> &lt;span style="color:#a6e22e">classes&lt;/span>.&lt;span style="color:#a6e22e">length&lt;/span>; &lt;span style="color:#a6e22e">i&lt;/span>&lt;span style="color:#f92672">++&lt;/span>) {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> (&lt;span style="color:#a6e22e">checkCondition&lt;/span>(&lt;span style="color:#a6e22e">classes&lt;/span>[&lt;span style="color:#a6e22e">i&lt;/span>]) &lt;span style="color:#f92672">===&lt;/span> &lt;span style="color:#66d9ef">undefined&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">console&lt;/span>.&lt;span style="color:#a6e22e">log&lt;/span>(&lt;span style="color:#e6db74">&amp;#39;undefined&amp;#39;&lt;/span>);
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>content &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>doc &lt;span style="color:#f92672">=&lt;/span> pymupdf&lt;span style="color:#f92672">.&lt;/span>open(&lt;span style="color:#e6db74">&amp;#34;./pdf_test/test.pdf&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">for&lt;/span> page &lt;span style="color:#f92672">in&lt;/span> doc:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> text &lt;span style="color:#f92672">=&lt;/span> page&lt;span style="color:#f92672">.&lt;/span>get_text()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> print(text)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> content &lt;span style="color:#f92672">+=&lt;/span> text
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> (
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;lt;&lt;/span>&lt;span style="color:#a6e22e">div&lt;/span>&lt;span style="color:#f92672">&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;lt;&lt;/span>&lt;span style="color:#a6e22e">web&lt;/span>&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#a6e22e">component&lt;/span>&lt;span style="color:#f92672">&amp;gt;&lt;/span>{&lt;span style="color:#a6e22e">block&lt;/span>}&lt;span style="color:#f92672">&amp;lt;&lt;/span>&lt;span style="color:#960050;background-color:#1e0010">/web-component&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;lt;&lt;/span>&lt;span style="color:#960050;background-color:#1e0010">/div&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">with&lt;/span> open(&lt;span style="color:#e6db74">&amp;#34;./pdf_test/pymupdf.txt&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;w&amp;#34;&lt;/span>) &lt;span style="color:#66d9ef">as&lt;/span> f:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> f&lt;span style="color:#f92672">.&lt;/span>write(content)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;img src="https://proseguys.github.io/images/pdf_extractor_report/Untitled%204.png" alt="Untitled">&lt;/p>
+&lt;p>&lt;img src="https://proseguys.github.io/images/pdf_extractor_report/Untitled%205.png" alt="Untitled">&lt;/p>
+&lt;h3 id="pypdfium2">pypdfium2&lt;/h3>
+&lt;p>&lt;strong>文档地址：&lt;/strong> &lt;a href="https://github.com/pypdfium2-team/pypdfium2">https://github.com/pypdfium2-team/pypdfium2&lt;/a>&lt;/p>
+&lt;p>&lt;strong>简介：&lt;/strong> pypdfium2是与PDFium绑定的ABI 级Python 3，PDFium 是一个功能强大且经过自由许可的库，用于 PDF 渲染、检查、操作和创建。&lt;/p>
+&lt;p>&lt;strong>测试结果：&lt;/strong> 与PyMuPDF类似，通过Document以及Page来实现页面文本信息的获取，也支持获取文件大纲用于判断文档标题，文本内容在获取时会丢失相关层级结构&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> pypdfium2 &lt;span style="color:#66d9ef">as&lt;/span> pdfium
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>pdf &lt;span style="color:#f92672">=&lt;/span> pdfium&lt;span style="color:#f92672">.&lt;/span>PdfDocument(&lt;span style="color:#e6db74">&amp;#34;./pdf_test/test.pdf&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">for&lt;/span> item &lt;span style="color:#f92672">in&lt;/span> pdf&lt;span style="color:#f92672">.&lt;/span>get_toc():
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> state &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;*&amp;#34;&lt;/span> &lt;span style="color:#66d9ef">if&lt;/span> item&lt;span style="color:#f92672">.&lt;/span>n_kids &lt;span style="color:#f92672">==&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span> &lt;span style="color:#66d9ef">else&lt;/span> &lt;span style="color:#e6db74">&amp;#34;-&amp;#34;&lt;/span> &lt;span style="color:#66d9ef">if&lt;/span> item&lt;span style="color:#f92672">.&lt;/span>is_closed &lt;span style="color:#66d9ef">else&lt;/span> &lt;span style="color:#e6db74">&amp;#34;+&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> target &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;?&amp;#34;&lt;/span> &lt;span style="color:#66d9ef">if&lt;/span> item&lt;span style="color:#f92672">.&lt;/span>page_index &lt;span style="color:#f92672">is&lt;/span> &lt;span style="color:#66d9ef">None&lt;/span> &lt;span style="color:#66d9ef">else&lt;/span> item&lt;span style="color:#f92672">.&lt;/span>page_index &lt;span style="color:#f92672">+&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> print(
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34; &amp;#34;&lt;/span> &lt;span style="color:#f92672">*&lt;/span> item&lt;span style="color:#f92672">.&lt;/span>level
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">+&lt;/span> &lt;span style="color:#e6db74">&amp;#34;[&lt;/span>&lt;span style="color:#e6db74">%s&lt;/span>&lt;span style="color:#e6db74">] &lt;/span>&lt;span style="color:#e6db74">%s&lt;/span>&lt;span style="color:#e6db74"> -&amp;gt; &lt;/span>&lt;span style="color:#e6db74">%s&lt;/span>&lt;span style="color:#e6db74"> # &lt;/span>&lt;span style="color:#e6db74">%s&lt;/span>&lt;span style="color:#e6db74"> &lt;/span>&lt;span style="color:#e6db74">%s&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">%&lt;/span> (
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> state,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> item&lt;span style="color:#f92672">.&lt;/span>title,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> target,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> item&lt;span style="color:#f92672">.&lt;/span>view_mode,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> item&lt;span style="color:#f92672">.&lt;/span>view_pos,
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> )
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> )
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>print(list(pdf&lt;span style="color:#f92672">.&lt;/span>get_toc()))
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;img src="https://proseguys.github.io/images/pdf_extractor_report/Untitled%206.png" alt="Untitled">&lt;/p>
+&lt;p>可以展示PDF文件的层级结构&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> pypdfium2 &lt;span style="color:#66d9ef">as&lt;/span> pdfium
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">export&lt;/span> &lt;span style="color:#a6e22e">$initHighlight&lt;/span>;
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-cpp" data-lang="cpp">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#include&lt;/span> &lt;span style="color:#75715e">&amp;lt;iostream&amp;gt;&lt;/span>&lt;span style="color:#75715e">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">int&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>(&lt;span style="color:#66d9ef">int&lt;/span> argc, &lt;span style="color:#66d9ef">char&lt;/span> &lt;span style="color:#f92672">*&lt;/span>argv[]) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>pdf &lt;span style="color:#f92672">=&lt;/span> pdfium&lt;span style="color:#f92672">.&lt;/span>PdfDocument(&lt;span style="color:#e6db74">&amp;#34;./pdf_test/test.pdf&amp;#34;&lt;/span>)
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">/* An annoying &amp;#34;Hello World&amp;#34; example */&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> (&lt;span style="color:#66d9ef">auto&lt;/span> i &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>; i &lt;span style="color:#f92672">&amp;lt;&lt;/span> &lt;span style="color:#ae81ff">0xFFFF&lt;/span>; i&lt;span style="color:#f92672">++&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> cout &lt;span style="color:#f92672">&amp;lt;&amp;lt;&lt;/span> &lt;span style="color:#e6db74">&amp;#34;Hello, World!&amp;#34;&lt;/span> &lt;span style="color:#f92672">&amp;lt;&amp;lt;&lt;/span> endl;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>content &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">for&lt;/span> page &lt;span style="color:#f92672">in&lt;/span> pdf:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> textpage &lt;span style="color:#f92672">=&lt;/span> page&lt;span style="color:#f92672">.&lt;/span>get_textpage()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> text_all &lt;span style="color:#f92672">=&lt;/span> textpage&lt;span style="color:#f92672">.&lt;/span>get_text_range()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> print(text_all)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> content &lt;span style="color:#f92672">+=&lt;/span> text_all
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">char&lt;/span> c &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#39;\n&amp;#39;&lt;/span>;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> unordered_map &lt;span style="color:#f92672">&amp;lt;&lt;/span>string, vector&lt;span style="color:#f92672">&amp;lt;&lt;/span>string&lt;span style="color:#f92672">&amp;gt;&lt;/span> &lt;span style="color:#f92672">&amp;gt;&lt;/span> m;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> m[&lt;span style="color:#e6db74">&amp;#34;key&amp;#34;&lt;/span>] &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#ae81ff">\\\\&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>; &lt;span style="color:#75715e">// this is an error
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">2e3&lt;/span> &lt;span style="color:#f92672">+&lt;/span> &lt;span style="color:#ae81ff">12l&lt;/span>;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sql" data-lang="sql">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">CREATE&lt;/span> &lt;span style="color:#66d9ef">TABLE&lt;/span> &lt;span style="color:#e6db74">&amp;#34;topic&amp;#34;&lt;/span> (
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;id&amp;#34;&lt;/span> serial &lt;span style="color:#66d9ef">NOT&lt;/span> &lt;span style="color:#66d9ef">NULL&lt;/span> &lt;span style="color:#66d9ef">PRIMARY&lt;/span> &lt;span style="color:#66d9ef">KEY&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;forum_id&amp;#34;&lt;/span> integer &lt;span style="color:#66d9ef">NOT&lt;/span> &lt;span style="color:#66d9ef">NULL&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;subject&amp;#34;&lt;/span> varchar(&lt;span style="color:#ae81ff">255&lt;/span>) &lt;span style="color:#66d9ef">NOT&lt;/span> &lt;span style="color:#66d9ef">NULL&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>);
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">ALTER&lt;/span> &lt;span style="color:#66d9ef">TABLE&lt;/span> &lt;span style="color:#e6db74">&amp;#34;topic&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">ADD&lt;/span> &lt;span style="color:#66d9ef">CONSTRAINT&lt;/span> forum_id &lt;span style="color:#66d9ef">FOREIGN&lt;/span> &lt;span style="color:#66d9ef">KEY&lt;/span> (&lt;span style="color:#e6db74">&amp;#34;forum_id&amp;#34;&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">REFERENCES&lt;/span> &lt;span style="color:#e6db74">&amp;#34;forum&amp;#34;&lt;/span> (&lt;span style="color:#e6db74">&amp;#34;id&amp;#34;&lt;/span>);
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">-- Initials
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>&lt;span style="color:#66d9ef">insert&lt;/span> &lt;span style="color:#66d9ef">into&lt;/span> &lt;span style="color:#e6db74">&amp;#34;topic&amp;#34;&lt;/span> (&lt;span style="color:#e6db74">&amp;#34;forum_id&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;subject&amp;#34;&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">values&lt;/span> (&lt;span style="color:#ae81ff">2&lt;/span>, &lt;span style="color:#e6db74">&amp;#39;D&amp;#39;&amp;#39;artagnian&amp;#39;&lt;/span>);
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-objectivec" data-lang="objectivec">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#import &amp;lt;UIKit/UIKit.h&amp;gt;
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#import &amp;#34;Dependency.h&amp;#34;
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">@protocol&lt;/span> &lt;span style="color:#a6e22e">WorldDataSource&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">@optional&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">-&lt;/span> (NSString&lt;span style="color:#f92672">*&lt;/span>)worldName;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">@required&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">-&lt;/span> (&lt;span style="color:#66d9ef">BOOL&lt;/span>)allowsToLive;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">@end&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">@property&lt;/span> (&lt;span style="color:#66d9ef">nonatomic&lt;/span>, &lt;span style="color:#66d9ef">readonly&lt;/span>) NSString &lt;span style="color:#f92672">*&lt;/span>title;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>- (&lt;span style="color:#66d9ef">IBAction&lt;/span>) &lt;span style="color:#a6e22e">show&lt;/span>;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">@end&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">/**
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"> * @author John Smith &amp;lt;john.smith@example.com&amp;gt;
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">*/&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">package&lt;/span> l2f.gameserver.model;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">public&lt;/span> &lt;span style="color:#66d9ef">abstract&lt;/span> &lt;span style="color:#66d9ef">class&lt;/span> &lt;span style="color:#a6e22e">L2Char&lt;/span> &lt;span style="color:#66d9ef">extends&lt;/span> L2Object {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">public&lt;/span> &lt;span style="color:#66d9ef">static&lt;/span> &lt;span style="color:#66d9ef">final&lt;/span> Short ERROR &lt;span style="color:#f92672">=&lt;/span> 0x0001;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">public&lt;/span> &lt;span style="color:#66d9ef">void&lt;/span> &lt;span style="color:#a6e22e">moveTo&lt;/span>(&lt;span style="color:#66d9ef">int&lt;/span> x, &lt;span style="color:#66d9ef">int&lt;/span> y, &lt;span style="color:#66d9ef">int&lt;/span> z) {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> _ai &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">null&lt;/span>;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> log(&lt;span style="color:#e6db74">&amp;#34;Should not be called&amp;#34;&lt;/span>);
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> (1 &lt;span style="color:#f92672">&amp;gt;&lt;/span> 5) { &lt;span style="color:#75715e">// wtf!?&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span>;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-swift" data-lang="swift">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">import&lt;/span> &lt;span style="color:#a6e22e">Foundation&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">@objc&lt;/span> &lt;span style="color:#66d9ef">class&lt;/span> &lt;span style="color:#a6e22e">Person&lt;/span>: Entity {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">var&lt;/span> name: String!
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">var&lt;/span> age: Int!
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">init&lt;/span>(name: String, age: Int) {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">/* /* ... */ */&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">// Return a descriptive string for this person&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">description&lt;/span>(offset: Int = &lt;span style="color:#ae81ff">0&lt;/span>) -&amp;gt; String {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#e6db74">\(&lt;/span>name&lt;span style="color:#e6db74">)&lt;/span>&lt;span style="color:#e6db74"> is &lt;/span>&lt;span style="color:#e6db74">\(&lt;/span>age &lt;span style="color:#f92672">+&lt;/span> offset&lt;span style="color:#e6db74">)&lt;/span>&lt;span style="color:#e6db74"> years old&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-css" data-lang="css">&lt;span style="display:flex;">&lt;span>@&lt;span style="color:#66d9ef">font-face&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">font-family&lt;/span>&lt;span style="color:#f92672">:&lt;/span> &lt;span style="color:#f92672">Chunkfive&lt;/span>&lt;span style="color:#f92672">;&lt;/span> &lt;span style="color:#f92672">src&lt;/span>&lt;span style="color:#f92672">:&lt;/span> &lt;span style="color:#f92672">url&lt;/span>&lt;span style="color:#f92672">(&lt;/span>&lt;span style="color:#e6db74">&amp;#39;Chunkfive.otf&amp;#39;&lt;/span>&lt;span style="color:#f92672">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">body&lt;/span>&lt;span style="color:#f92672">,&lt;/span> .&lt;span style="color:#a6e22e">usertext&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">color&lt;/span>: &lt;span style="color:#ae81ff">#F0F0F0&lt;/span>; &lt;span style="color:#66d9ef">background&lt;/span>: &lt;span style="color:#ae81ff">#600&lt;/span>;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">font-family&lt;/span>: Chunkfive, sans;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>@&lt;span style="color:#66d9ef">import&lt;/span> &lt;span style="color:#f92672">url&lt;/span>&lt;span style="color:#f92672">(&lt;/span>&lt;span style="color:#f92672">print&lt;/span>.&lt;span style="color:#a6e22e">css&lt;/span>&lt;span style="color:#f92672">)&lt;/span>;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>@&lt;span style="color:#66d9ef">media&lt;/span> &lt;span style="color:#f92672">print&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">a&lt;/span>&lt;span style="color:#f92672">[&lt;/span>&lt;span style="color:#f92672">href&lt;/span>&lt;span style="color:#f92672">^=&lt;/span>&lt;span style="color:#f92672">http&lt;/span>&lt;span style="color:#f92672">]&lt;/span>::&lt;span style="color:#a6e22e">after&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">content&lt;/span>: attr(href)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-ruby" data-lang="ruby">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># The Greeter class&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">class&lt;/span> &lt;span style="color:#a6e22e">Greeter&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">def&lt;/span> &lt;span style="color:#a6e22e">initialize&lt;/span>(name)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> @name &lt;span style="color:#f92672">=&lt;/span> name&lt;span style="color:#f92672">.&lt;/span>capitalize
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">end&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">def&lt;/span> &lt;span style="color:#a6e22e">salute&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> puts &lt;span style="color:#e6db74">&amp;#34;Hello &lt;/span>&lt;span style="color:#e6db74">#{&lt;/span>@name&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">!&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">end&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">end&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>g &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">Greeter&lt;/span>&lt;span style="color:#f92672">.&lt;/span>new(&lt;span style="color:#e6db74">&amp;#34;world&amp;#34;&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>g&lt;span style="color:#f92672">.&lt;/span>salute
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-makefile" data-lang="makefile">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Makefile
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>BUILDDIR &lt;span style="color:#f92672">=&lt;/span> _build
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>EXTRAS &lt;span style="color:#f92672">?=&lt;/span> &lt;span style="color:#66d9ef">$(&lt;/span>BUILDDIR&lt;span style="color:#66d9ef">)&lt;/span>/extras
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">.PHONY&lt;/span>&lt;span style="color:#f92672">:&lt;/span> main clean
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">main&lt;/span>&lt;span style="color:#f92672">:&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> @echo &lt;span style="color:#e6db74">&amp;#34;Building main facility...&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> build_main &lt;span style="color:#66d9ef">$(&lt;/span>BUILDDIR&lt;span style="color:#66d9ef">)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">clean&lt;/span>&lt;span style="color:#f92672">:&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> rm -rf &lt;span style="color:#66d9ef">$(&lt;/span>BUILDDIR&lt;span style="color:#66d9ef">)&lt;/span>/*
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">package&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> &lt;span style="color:#e6db74">&amp;#34;fmt&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>() {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">ch&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> make(&lt;span style="color:#66d9ef">chan&lt;/span> &lt;span style="color:#66d9ef">float64&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">ch&lt;/span> &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#ae81ff">1.0e10&lt;/span> &lt;span style="color:#75715e">// magic number
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#a6e22e">x&lt;/span>, &lt;span style="color:#a6e22e">ok&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">ch&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">defer&lt;/span> &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Println&lt;/span>(&lt;span style="color:#e6db74">`exitting now\`&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">go&lt;/span> println(len(&lt;span style="color:#e6db74">&amp;#34;hello world!&amp;#34;&lt;/span>))
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#!/bin/bash
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">###### CONFIG&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ACCEPTED_HOSTS&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;/root/.hag_accepted.conf&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>BE_VERBOSE&lt;span style="color:#f92672">=&lt;/span>false
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">if&lt;/span> &lt;span style="color:#f92672">[&lt;/span> &lt;span style="color:#e6db74">&amp;#34;&lt;/span>$UID&lt;span style="color:#e6db74">&amp;#34;&lt;/span> -ne &lt;span style="color:#ae81ff">0&lt;/span> &lt;span style="color:#f92672">]&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">then&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> echo &lt;span style="color:#e6db74">&amp;#34;Superuser rights required&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> exit &lt;span style="color:#ae81ff">2&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">fi&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>genApacheConf&lt;span style="color:#f92672">(){&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> echo -e &lt;span style="color:#e6db74">&amp;#34;# Host &lt;/span>&lt;span style="color:#e6db74">${&lt;/span>HOME_DIR&lt;span style="color:#e6db74">}&lt;/span>$1&lt;span style="color:#e6db74">/&lt;/span>$2&lt;span style="color:#e6db74"> :&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-ini" data-lang="ini">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">; boilerplate&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">[package]&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">name&lt;/span> &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;some_name&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">authors&lt;/span> &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">[&amp;#34;Author&amp;#34;]&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">description&lt;/span> &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;This is \&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">a description&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">[[lib]]&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">name&lt;/span> &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">${NAME}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">default&lt;/span> &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">True&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">auto&lt;/span> &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">no&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">counter&lt;/span> &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">1_000&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Elements</title><link>https://proseguys.github.io/blog/elements/</link><pubDate>Tue, 24 Dec 2013 23:29:08 +0000</pubDate><guid>https://proseguys.github.io/blog/elements/</guid><description>&lt;p>The purpose of this post is to help you make sure all of HTML elements can display properly. If you use CSS reset, don&amp;rsquo;t forget to redefine the style by yourself.&lt;/p>
-&lt;hr>
-&lt;h1 id="heading-1">Heading 1&lt;/h1>
-&lt;h2 id="heading-2">Heading 2&lt;/h2>
-&lt;h3 id="heading-3">Heading 3&lt;/h3>
-&lt;h4 id="heading-4">Heading 4&lt;/h4>
-&lt;h5 id="heading-5">Heading 5&lt;/h5>
-&lt;h6 id="heading-6">Heading 6&lt;/h6>
-&lt;hr>
-&lt;h2 id="paragraph">Paragraph&lt;/h2>
-&lt;p>Lorem ipsum dolor sit amet, &lt;a href="">test link&lt;/a> consectetur adipiscing elit. &lt;strong>Strong text&lt;/strong> pellentesque ligula commodo viverra vehicula. &lt;em>Italic text&lt;/em> at ullamcorper enim. Morbi a euismod nibh. &lt;!-- raw HTML omitted -->Underline text&lt;!-- raw HTML omitted --> non elit nisl. &lt;del>Deleted text&lt;/del> tristique, sem id condimentum tempus, metus lectus venenatis mauris, sit amet semper lorem felis a eros. Fusce egestas nibh at sagittis auctor. Sed ultricies ac arcu quis molestie. Donec dapibus nunc in nibh egestas, vitae volutpat sem iaculis. Curabitur sem tellus, elementum nec quam id, fermentum laoreet mi. Ut mollis ullamcorper turpis, vitae facilisis velit ultricies sit amet. Etiam laoreet dui odio, id tempus justo tincidunt id. Phasellus scelerisque nunc sed nunc ultricies accumsan.&lt;/p>
-&lt;p>Interdum et malesuada fames ac ante ipsum primis in faucibus. &lt;code>Sed erat diam&lt;/code>, blandit eget felis aliquam, rhoncus varius urna. Donec tellus sapien, sodales eget ante vitae, feugiat ullamcorper urna. Praesent auctor dui vitae dapibus eleifend. Proin viverra mollis neque, ut ullamcorper elit posuere eget.&lt;/p>
-&lt;blockquote>
-&lt;p>Praesent diam elit, interdum ut pulvinar placerat, imperdiet at magna.&lt;/p>
-&lt;/blockquote>
-&lt;p>Maecenas ornare arcu at mi suscipit, non molestie tortor ultrices. Aenean convallis, diam et congue ultricies, erat magna tincidunt orci, pulvinar posuere mi sapien ac magna. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Praesent vitae placerat mauris. Nullam laoreet ante posuere tortor blandit auctor. Sed id ligula volutpat leo consequat placerat. Mauris fermentum dolor sed augue malesuada sollicitudin. Vivamus ultrices nunc felis, quis viverra orci eleifend ut. Donec et quam id urna cursus posuere. Donec elementum scelerisque laoreet.&lt;/p>
-&lt;h2 id="list-types">List Types&lt;/h2>
-&lt;h3 id="definition-list-dl">Definition List (dl)&lt;/h3>
-&lt;!-- raw HTML omitted -->
-&lt;h3 id="ordered-list-ol">Ordered List (ol)&lt;/h3>
-&lt;ol>
-&lt;li>List Item 1&lt;/li>
-&lt;li>List Item 2&lt;/li>
-&lt;li>List Item 3&lt;/li>
-&lt;/ol>
-&lt;h3 id="unordered-list-ul">Unordered List (ul)&lt;/h3>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">with&lt;/span> open(&lt;span style="color:#e6db74">&amp;#34;pdf_test/pypdfium2.txt&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;w&amp;#34;&lt;/span>) &lt;span style="color:#66d9ef">as&lt;/span> f:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> f&lt;span style="color:#f92672">.&lt;/span>write(content)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;img src="https://proseguys.github.io/images/pdf_extractor_report/Untitled%207.png" alt="Untitled">&lt;/p>
+&lt;p>&lt;img src="https://proseguys.github.io/images/pdf_extractor_report/Untitled%208.png" alt="Untitled">&lt;/p>
+&lt;p>文本提取不如PyMuPDF结构，不过依旧可以通过大纲和标题获取文件内容的层级结构。&lt;/p>
+&lt;h3 id="mineru">MinerU&lt;/h3>
+&lt;p>文档地址：https://github.com/VikParuchuri/marker&lt;/p>
+&lt;p>&lt;strong>简介：&lt;/strong> 是一款一站式、开源、高质量的数据提取工具，主要提供以下主要功能：&lt;/p>
 &lt;ul>
-&lt;li>List Item 1&lt;/li>
-&lt;li>List Item 2&lt;/li>
-&lt;li>List Item 3&lt;/li>
-&lt;/ul>
-&lt;h3 id="checkbox-list-ul">Checkbox List (ul)&lt;/h3>
+&lt;li>Magic-PDF：是一款旨在将PDF文档转换为Markdown格式的工具，能够处理本地存储或支持S3协议的对象存储上的文件。
 &lt;ul>
-&lt;li>&lt;input disabled="" type="checkbox"> List Item 1 unchecked&lt;/li>
-&lt;li>&lt;input checked="" disabled="" type="checkbox"> List Item 2 checked&lt;/li>
-&lt;li>&lt;input checked="" disabled="" type="checkbox"> List Item 3 checked&lt;/li>
+&lt;li>支持多种前端模型输入&lt;/li>
+&lt;li>删除页眉、页脚、脚注和页码&lt;/li>
+&lt;li>人类可读的布局格式&lt;/li>
+&lt;li>保留原始文档的结构和格式，包括标题、段落、列表等&lt;/li>
+&lt;li>Markdown 图像和表格的提取和显示&lt;/li>
+&lt;li>自动检测并转换PDF乱码&lt;/li>
+&lt;li>将方程转换为 LaTeX 格式&lt;/li>
+&lt;li>与CPU和GPU环境的兼容性&lt;/li>
+&lt;li>适用于 Windows、Linux 和 macOS 平台&lt;/li>
+&lt;li>基于PDF-Extract-Kit作为PDF内容提取的工具&lt;/li>
 &lt;/ul>
-&lt;h2 id="table">Table&lt;/h2>
-&lt;table>
-&lt;thead>
-&lt;tr>
-&lt;th>Table Header 1&lt;/th>
-&lt;th>Table Header 2&lt;/th>
-&lt;th>Table Header 3&lt;/th>
-&lt;/tr>
-&lt;/thead>
-&lt;tbody>
-&lt;tr>
-&lt;td>Division 1&lt;/td>
-&lt;td>Division 2&lt;/td>
-&lt;td>Division 3&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>Division 1&lt;/td>
-&lt;td>Division 2&lt;/td>
-&lt;td>Division 3&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>Division 1&lt;/td>
-&lt;td>Division 2&lt;/td>
-&lt;td>Division 3&lt;/td>
-&lt;/tr>
-&lt;/tbody>
-&lt;/table>
-&lt;h2 id="misc-stuff---abbr-acronym-sub-sup-kbd-etc">Misc Stuff - abbr, acronym, sub, sup, kbd, etc.&lt;/h2>
-&lt;p>Lorem &lt;!-- raw HTML omitted -->superscript&lt;!-- raw HTML omitted --> dolor &lt;!-- raw HTML omitted -->subscript&lt;!-- raw HTML omitted --> amet, consectetuer adipiscing elit. Nullam dignissim convallis est. Quisque aliquam. &lt;!-- raw HTML omitted -->cite&lt;!-- raw HTML omitted -->. Nunc iaculis suscipit dui. Nam sit amet sem. Aliquam libero nisi, imperdiet at, tincidunt nec, gravida vehicula, nisl. Praesent mattis, massa quis luctus fermentum, turpis mi volutpat justo, eu volutpat enim diam eget metus. Maecenas ornare tortor. Donec sed tellus eget sapien fringilla nonummy. &lt;!-- raw HTML omitted -->NBA&lt;!-- raw HTML omitted --> Mauris a ante. Suspendisse quam sem, consequat at, commodo vitae, feugiat in, nunc. Morbi imperdiet augue quis tellus. &lt;!-- raw HTML omitted -->AVE&lt;!-- raw HTML omitted -->. Use &lt;!-- raw HTML omitted -->Crtl&lt;!-- raw HTML omitted --> + &lt;!-- raw HTML omitted -->C&lt;!-- raw HTML omitted --> to stop.&lt;/p></description></item><item><title>Markdown Style test</title><link>https://proseguys.github.io/blog/markdown/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://proseguys.github.io/blog/markdown/</guid><description>&lt;p>This post is originated from &lt;a href="https://gist.github.com/apackeer/4159268">here&lt;/a> and is used for testing markdown style. This post contains nearly every markdown usage. Make sure all the markdown elements below show up correctly.&lt;/p>
-&lt;hr>
-&lt;h2 id="headers">Headers&lt;/h2>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-markdown" data-lang="markdown">&lt;span style="display:flex;">&lt;span># H1
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">## H2
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">### H3
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#### H4
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">##### H5
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">###### H6
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Alternatively, for H1 and H2, an underline-ish style:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Alt-H1
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>======
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Alt-H2
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>------
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h1 id="h1">H1&lt;/h1>
-&lt;h2 id="h2">H2&lt;/h2>
-&lt;h3 id="h3">H3&lt;/h3>
-&lt;h4 id="h4">H4&lt;/h4>
-&lt;h5 id="h5">H5&lt;/h5>
-&lt;h6 id="h6">H6&lt;/h6>
-&lt;p>Alternatively, for H1 and H2, an underline-ish style:&lt;/p>
-&lt;h1 id="alt-h1">Alt-H1&lt;/h1>
-&lt;h2 id="alt-h2">Alt-H2&lt;/h2>
-&lt;h2 id="emphasis">Emphasis&lt;/h2>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-markdown" data-lang="markdown">&lt;span style="display:flex;">&lt;span>Emphasis, aka italics, with &lt;span style="font-style:italic">*asterisks*&lt;/span> or &lt;span style="font-style:italic">_underscores_&lt;/span>.
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Strong emphasis, aka bold, with &lt;span style="font-weight:bold">**asterisks**&lt;/span> or &lt;span style="font-weight:bold">__underscores__&lt;/span>.
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Combined emphasis with &lt;span style="font-weight:bold">**asterisks and _underscores_**&lt;/span>.
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Strikethrough uses two tildes. &lt;span style="color:#f92672">~~Scratch this.~~&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Emphasis, aka italics, with &lt;em>asterisks&lt;/em> or &lt;em>underscores&lt;/em>.&lt;/p>
-&lt;p>Strong emphasis, aka bold, with &lt;strong>asterisks&lt;/strong> or &lt;strong>underscores&lt;/strong>.&lt;/p>
-&lt;p>Combined emphasis with &lt;strong>asterisks and &lt;em>underscores&lt;/em>&lt;/strong>.&lt;/p>
-&lt;p>Strikethrough uses two tildes. &lt;del>Scratch this.&lt;/del>&lt;/p>
-&lt;h2 id="lists">Lists&lt;/h2>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-markdown" data-lang="markdown">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">1.&lt;/span> First ordered list item
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">2.&lt;/span> Another item
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">*&lt;/span> Unordered sub-list.
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">1.&lt;/span> Actual numbers don&amp;#39;t matter, just that it&amp;#39;s a number
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">1.&lt;/span> Ordered sub-list
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">4.&lt;/span> And another item.
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> You can have properly indented paragraphs within list items. Notice the blank line above, and the leading spaces (at least one, but we&amp;#39;ll use three here to also align the raw Markdown).
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> To have a line break without a paragraph, you will need to use two trailing spaces.
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Note that this line is separate, but within the same paragraph.
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> (This is contrary to the typical GFM line break behaviour, where trailing spaces are not required.)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">*&lt;/span> Unordered list can use asterisks
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">-&lt;/span> Or minuses
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>+ Or pluses
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">-&lt;/span> Paragraph In unordered list
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> For example like this.
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Common Paragraph with some text.
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>And more text.
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol>
-&lt;li>First ordered list item&lt;/li>
-&lt;li>Another item&lt;/li>
-&lt;/ol>
-&lt;ul>
-&lt;li>Unordered sub-list.&lt;/li>
-&lt;/ul>
-&lt;ol>
-&lt;li>
-&lt;p>Actual numbers don&amp;rsquo;t matter, just that it&amp;rsquo;s a number&lt;/p>
 &lt;/li>
-&lt;li>
-&lt;p>Ordered sub-list&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>And another item.&lt;/p>
-&lt;p>You can have properly indented paragraphs within list items. Notice the blank line above, and the leading spaces (at least one, but we&amp;rsquo;ll use three here to also align the raw Markdown).&lt;/p>
-&lt;p>To have a line break without a paragraph, you will need to use two trailing spaces.&lt;br>
-Note that this line is separate, but within the same paragraph.&lt;br>
-(This is contrary to the typical GFM line break behaviour, where trailing spaces are not required.)&lt;/p>
-&lt;/li>
-&lt;/ol>
+&lt;li>Magic-Doc：是一款旨在将网页或多格式电子书转换为Markdown格式的工具。
 &lt;ul>
-&lt;li>Unordered list can use asterisks&lt;/li>
+&lt;li>网页提取：文本、图像、表格、公式信息的跨模态精准解析。&lt;/li>
+&lt;li>电子书文档提取：支持epub、mobi等多种文档格式，文本、图片全面适配。&lt;/li>
+&lt;li>语言类型识别：准确识别176种语言。&lt;/li>
 &lt;/ul>
-&lt;ul>
-&lt;li>Or minuses&lt;/li>
-&lt;/ul>
-&lt;ul>
-&lt;li>Or pluses&lt;/li>
-&lt;/ul>
-&lt;ul>
-&lt;li>
-&lt;p>Paragraph In unordered list&lt;/p>
-&lt;p>For example like this.&lt;/p>
 &lt;/li>
 &lt;/ul>
-&lt;p>Common Paragraph with some text.
-And more text.&lt;/p>
-&lt;h2 id="inline-html">Inline HTML&lt;/h2>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-markdown" data-lang="markdown">&lt;span style="display:flex;">&lt;span>&amp;lt;&lt;span style="color:#f92672">p&lt;/span>&amp;gt;To reboot your computer, press &amp;lt;&lt;span style="color:#f92672">kbd&lt;/span>&amp;gt;ctrl&amp;lt;/&lt;span style="color:#f92672">kbd&lt;/span>&amp;gt;+&amp;lt;&lt;span style="color:#f92672">kbd&lt;/span>&amp;gt;alt&amp;lt;/&lt;span style="color:#f92672">kbd&lt;/span>&amp;gt;+&amp;lt;&lt;span style="color:#f92672">kbd&lt;/span>&amp;gt;del&amp;lt;/&lt;span style="color:#f92672">kbd&lt;/span>&amp;gt;.&amp;lt;/&lt;span style="color:#f92672">p&lt;/span>&amp;gt;
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;!-- raw HTML omitted -->
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-markdown" data-lang="markdown">&lt;span style="display:flex;">&lt;span>&amp;lt;&lt;span style="color:#f92672">dl&lt;/span>&amp;gt;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;lt;&lt;span style="color:#f92672">dt&lt;/span>&amp;gt;Definition list&amp;lt;/&lt;span style="color:#f92672">dt&lt;/span>&amp;gt;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;lt;&lt;span style="color:#f92672">dd&lt;/span>&amp;gt;Is something people use sometimes.&amp;lt;/&lt;span style="color:#f92672">dd&lt;/span>&amp;gt;
+&lt;p>本文主要记录Magic-PDF对于PDF解析效果，Magic-PDF基于PDF-Extract-Kit进行PDF内容提取，因此需要下载PaddleOcr和其自定义训练的模型。模型大小约5G左右。&lt;/p>
+&lt;p>&lt;strong>测试结果：&lt;/strong> 由于Magic-PDF模块安装复杂，因此使用命令行形式进行测试&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>magic&lt;span style="color:#f92672">-&lt;/span>pdf pdf&lt;span style="color:#f92672">-&lt;/span>command &lt;span style="color:#f92672">--&lt;/span>pdf &lt;span style="color:#e6db74">&amp;#34;pdf_path/test.pdf&amp;#34;&lt;/span> &lt;span style="color:#f92672">--&lt;/span>inside_model true
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>成功执行后，会在设定好的temp-output-dir目录下生成magic-pdf文件夹。每单次执行会在此目录下生成一个文件夹内部包含解析文件&lt;/p>
+&lt;p>&lt;img src="https://proseguys.github.io/images/pdf_extractor_report/Untitled%209.png" alt="Untitled">&lt;/p>
+&lt;p>layout.pdf和spans.pdf代表源PDF文件的内部元素的布局和宽度&lt;/p>
+&lt;p>&lt;img src="https://proseguys.github.io/images/pdf_extractor_report/Untitled%2010.png" alt="Untitled">&lt;/p>
+&lt;p>&lt;img src="https://proseguys.github.io/images/pdf_extractor_report/Untitled%2011.png" alt="Untitled">&lt;/p>
+&lt;p>后缀为md的文件代表其生成的Markdown文件：&lt;/p>
+&lt;p>&lt;img src="https://proseguys.github.io/images/pdf_extractor_report/Untitled%2012.png" alt="Untitled">&lt;/p>
+&lt;p>后缀为json的文件代表各个元素的各类信息。&lt;/p>
+&lt;p>通过与源文件对比，可发现存在部分元素提取异常，元素结构提取错误。标题格式误识别率较高。如下图”DNS解析流程“应该为正文内容，这里却将它识别成了标题。&lt;/p>
+&lt;p>&lt;img src="https://proseguys.github.io/images/pdf_extractor_report/Untitled%2013.png" alt="Untitled">&lt;/p>
+&lt;h3 id="marker">marker&lt;/h3>
+&lt;p>&lt;strong>文档地址：&lt;/strong> &lt;a href="https://github.com/VikParuchuri/marker">https://github.com/VikParuchuri/marker&lt;/a>&lt;/p>
+&lt;p>&lt;strong>简介：&lt;/strong> 快速准确地将 PDF 转换为 Markdown。&lt;/p>
+&lt;ul>
+&lt;li>支持多种文档（针对书籍和科学论文进行了优化）&lt;/li>
+&lt;li>支持所有语言&lt;/li>
+&lt;li>清除页眉/页脚/其他杂物&lt;/li>
+&lt;li>格式化表格和代码块&lt;/li>
+&lt;li>提取并保存图像以及相应的 markdown&lt;/li>
+&lt;li>将大多数方程转换为 latex&lt;/li>
+&lt;li>可在 GPU、CPU 或 MPS 上运行&lt;/li>
+&lt;/ul>
+&lt;p>&lt;strong>测试结果：通过 &lt;code>convert_single_pdf&lt;/code>方法直接获取整页PDF的文本信息，可以提取部分文档层级结构，可以提取代码、表格、公式，页眉页脚未能正确去除。&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">from&lt;/span> marker.convert &lt;span style="color:#f92672">import&lt;/span> convert_single_pdf
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">from&lt;/span> marker.models &lt;span style="color:#f92672">import&lt;/span> load_all_models
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;lt;&lt;span style="color:#f92672">dt&lt;/span>&amp;gt;Markdown in HTML&amp;lt;/&lt;span style="color:#f92672">dt&lt;/span>&amp;gt;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;lt;&lt;span style="color:#f92672">dd&lt;/span>&amp;gt;Does &lt;span style="font-style:italic">*not*&lt;/span> work &lt;span style="font-weight:bold">**very**&lt;/span> well. Use HTML &amp;lt;&lt;span style="color:#f92672">em&lt;/span>&amp;gt;tags&amp;lt;/&lt;span style="color:#f92672">em&lt;/span>&amp;gt;.&amp;lt;/&lt;span style="color:#f92672">dd&lt;/span>&amp;gt;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&amp;lt;/&lt;span style="color:#f92672">dl&lt;/span>&amp;gt;
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;!-- raw HTML omitted -->
-&lt;pre>&lt;code>&amp;lt;dt&amp;gt;Markdown in HTML&amp;lt;/dt&amp;gt;
-&amp;lt;dd&amp;gt;Does *not* work **very** well. Use HTML &amp;lt;em&amp;gt;tags&amp;lt;/em&amp;gt;.&amp;lt;/dd&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>full_text, images, out_meta &lt;span style="color:#f92672">=&lt;/span> convert_single_pdf(
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;./test2.pdf&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> load_all_models(),
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> langs&lt;span style="color:#f92672">=&lt;/span>[&lt;span style="color:#e6db74">&amp;#34;Chinese&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;English&amp;#34;&lt;/span>],
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> batch_multiplier&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">2&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>print(full_text)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>print(images)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>print(out_meta)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;img src="https://proseguys.github.io/images/pdf_extractor_report/image.png" alt="image.png">&lt;/p>
+&lt;p>&lt;img src="https://proseguys.github.io/images/pdf_extractor_report/image%201.png" alt="image.png">&lt;/p>
+&lt;p>&lt;img src="https://proseguys.github.io/images/pdf_extractor_report/image%202.png" alt="image.png">&lt;/p>
+&lt;pre>&lt;code> 部分层级结构保留
 &lt;/code>&lt;/pre>
-&lt;!-- raw HTML omitted -->
-&lt;h2 id="links">Links&lt;/h2>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-markdown" data-lang="markdown">&lt;span style="display:flex;">&lt;span>[&lt;span style="color:#f92672">I&amp;#39;m an inline-style link&lt;/span>](&lt;span style="color:#a6e22e">https://www.google.com&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>[&lt;span style="color:#f92672">I&amp;#39;m an inline-style link with title&lt;/span>](&lt;span style="color:#a6e22e">https://www.google.com &amp;#34;Google&amp;#39;s Homepage&amp;#34;&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>[I&amp;#39;m a reference-style link][Arbitrary case-insensitive reference text]
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>[&lt;span style="color:#f92672">I&amp;#39;m a relative reference to a repository file&lt;/span>](&lt;span style="color:#a6e22e">../blob/master/LICENSE&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>[You can use numbers for reference-style link definitions][1]
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Or leave it empty and use the [link text itself]
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Some text to show that the reference links can follow later.
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>[arbitrary case-insensitive reference text]: https://hexo.io
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>[1]: https://hexo.io/docs/
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>[link text itself]: https://hexo.io/api/
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;a href="https://www.google.com">I&amp;rsquo;m an inline-style link&lt;/a>&lt;/p>
-&lt;p>&lt;a href="https://www.google.com" title="Google's Homepage">I&amp;rsquo;m an inline-style link with title&lt;/a>&lt;/p>
-&lt;p>&lt;a href="https://hexo.io">I&amp;rsquo;m a reference-style link&lt;/a>&lt;/p>
-&lt;p>&lt;a href="../blob/master/LICENSE">I&amp;rsquo;m a relative reference to a repository file&lt;/a>&lt;/p>
-&lt;p>&lt;a href="https://hexo.io/docs/">You can use numbers for reference-style link definitions&lt;/a>&lt;/p>
-&lt;p>Or leave it empty and use the &lt;a href="https://hexo.io/api/">link text itself&lt;/a>&lt;/p>
-&lt;p>Some text to show that the reference links can follow later.&lt;/p>
-&lt;h2 id="images">Images&lt;/h2>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-markdown" data-lang="markdown">&lt;span style="display:flex;">&lt;span>hover to see the title text:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Inline-style:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>![&lt;span style="color:#f92672">alt text&lt;/span>](&lt;span style="color:#a6e22e">https://hexo.io/icon/favicon-196x196.png &amp;#34;Logo Title Text 1&amp;#34;&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Reference-style:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>![alt text][logo]
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>[logo]: https://hexo.io/icon/favicon-196x196.png &amp;#34;Logo Title Text 2&amp;#34;
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>hover to see the title text:&lt;/p>
-&lt;p>Inline-style:&lt;/p>
-&lt;p>&lt;img src="https://hexo.io/icon/favicon-196x196.png" alt="alt text" title="Logo Title Text 1">&lt;/p>
-&lt;p>Reference-style:
-&lt;img src="https://hexo.io/icon/favicon-196x196.png" alt="alt text" title="Logo Title Text 2">&lt;/p>
-&lt;h2 id="code-and-syntax-highlighting">Code and Syntax Highlighting&lt;/h2>
-&lt;p>Inline &lt;code>code&lt;/code> has &lt;code>back-ticks around&lt;/code> it.&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">var&lt;/span> &lt;span style="color:#a6e22e">s&lt;/span> &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;JavaScript syntax highlighting&amp;#34;&lt;/span>;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">alert&lt;/span>(&lt;span style="color:#a6e22e">s&lt;/span>);
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>s &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;Python syntax highlighting&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>print s
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;pre tabindex="0">&lt;code>No language indicated, so no syntax highlighting.
-But let&amp;#39;s throw in a &amp;lt;b&amp;gt;tag&amp;lt;/b&amp;gt;.
-&lt;/code>&lt;/pre>&lt;h2 id="tables">Tables&lt;/h2>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-markdown" data-lang="markdown">&lt;span style="display:flex;">&lt;span>| |ASCII |HTML |
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>|----------------|-------------------------------|-----------------------------|
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>|Single backticks|`&amp;#39;Isn&amp;#39;t this fun?&amp;#39;` |&amp;#39;Isn&amp;#39;t this fun?&amp;#39; |
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>|Quotes |`&amp;#34;Isn&amp;#39;t this fun?&amp;#34;` |&amp;#34;Isn&amp;#39;t this fun?&amp;#34; |
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>|Dashes |`-- is en-dash, --- is em-dash`|-- is en-dash, --- is em-dash|
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;table>
-&lt;thead>
-&lt;tr>
-&lt;th>&lt;/th>
-&lt;th>ASCII&lt;/th>
-&lt;th>HTML&lt;/th>
-&lt;/tr>
-&lt;/thead>
-&lt;tbody>
-&lt;tr>
-&lt;td>Single backticks&lt;/td>
-&lt;td>&lt;code>'Isn't this fun?'&lt;/code>&lt;/td>
-&lt;td>&amp;lsquo;Isn&amp;rsquo;t this fun?&amp;rsquo;&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>Quotes&lt;/td>
-&lt;td>&lt;code>&amp;quot;Isn't this fun?&amp;quot;&lt;/code>&lt;/td>
-&lt;td>&amp;ldquo;Isn&amp;rsquo;t this fun?&amp;rdquo;&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>Dashes&lt;/td>
-&lt;td>&lt;code>-- is en-dash, --- is em-dash&lt;/code>&lt;/td>
-&lt;td>&amp;ndash; is en-dash, &amp;mdash; is em-dash&lt;/td>
-&lt;/tr>
-&lt;/tbody>
-&lt;/table>
-&lt;p>Colons can be used to align columns.&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-markdown" data-lang="markdown">&lt;span style="display:flex;">&lt;span>| Tables | Are | Cool |
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>| ------------- |:-------------:| -----:|
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>| col 3 is | right-aligned | |
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>| col 2 is | centered | |
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>| zebra stripes | are neat |
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;table>
-&lt;thead>
-&lt;tr>
-&lt;th>Tables&lt;/th>
-&lt;th style="text-align:center">Are&lt;/th>
-&lt;th style="text-align:right">Cool&lt;/th>
-&lt;/tr>
-&lt;/thead>
-&lt;tbody>
-&lt;tr>
-&lt;td>col 3 is&lt;/td>
-&lt;td style="text-align:center">right-aligned&lt;/td>
-&lt;td style="text-align:right">&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>col 2 is&lt;/td>
-&lt;td style="text-align:center">centered&lt;/td>
-&lt;td style="text-align:right">&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>zebra stripes&lt;/td>
-&lt;td style="text-align:center">are neat&lt;/td>
-&lt;td style="text-align:right">&lt;/td>
-&lt;/tr>
-&lt;/tbody>
-&lt;/table>
-&lt;p>The outer pipes (|) are optional, and you don&amp;rsquo;t need to make the raw Markdown line up prettily. You can also use inline Markdown.&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-markdown" data-lang="markdown">&lt;span style="display:flex;">&lt;span>Markdown | Less | Pretty
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>--- | --- | ---
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="font-style:italic">*Still*&lt;/span> | &lt;span style="color:#e6db74">`renders`&lt;/span> | &lt;span style="font-weight:bold">**nicely**&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>1 | 2 | 3
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;table>
-&lt;thead>
-&lt;tr>
-&lt;th>Markdown&lt;/th>
-&lt;th>Less&lt;/th>
-&lt;th>Pretty&lt;/th>
-&lt;/tr>
-&lt;/thead>
-&lt;tbody>
-&lt;tr>
-&lt;td>&lt;em>Still&lt;/em>&lt;/td>
-&lt;td>&lt;code>renders&lt;/code>&lt;/td>
-&lt;td>&lt;strong>nicely&lt;/strong>&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>1&lt;/td>
-&lt;td>2&lt;/td>
-&lt;td>3&lt;/td>
-&lt;/tr>
-&lt;/tbody>
-&lt;/table>
-&lt;blockquote>
-&lt;p>You can find more information about &lt;strong>LaTeX&lt;/strong> mathematical expressions &lt;a href="https://math.meta.stackexchange.com/questions/5020/mathjax-basic-tutorial-and-quick-reference">here&lt;/a>.&lt;/p>
-&lt;/blockquote>
-&lt;h2 id="blockquotes">Blockquotes&lt;/h2>
-&lt;blockquote>
-&lt;p>Blockquotes are very handy in email to emulate reply text.
-This line is part of the same quote.&lt;/p>
-&lt;/blockquote>
-&lt;p>Quote break.&lt;/p>
-&lt;blockquote>
-&lt;p>This is a very long line that will still be quoted properly when it wraps. Oh boy let&amp;rsquo;s keep writing to make sure this is long enough to actually wrap for everyone. Oh, you can &lt;em>put&lt;/em> &lt;strong>Markdown&lt;/strong> into a blockquote.&lt;/p>
-&lt;/blockquote>
-&lt;h2 id="horizontal-rule">Horizontal Rule&lt;/h2>
-&lt;p>Three or more&amp;hellip;&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-markdown" data-lang="markdown">&lt;span style="display:flex;">&lt;span>---
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Hyphens
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="font-style:italic">**&lt;/span>*
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Asterisks
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>___
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Underscores
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;hr>
-&lt;p>Hyphens&lt;/p>
-&lt;hr>
-&lt;p>Asterisks&lt;/p>
-&lt;hr>
-&lt;p>Underscores&lt;/p>
-&lt;h2 id="line-breaks">Line Breaks&lt;/h2>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-markdown" data-lang="markdown">&lt;span style="display:flex;">&lt;span>Here&amp;#39;s a line for us to start with.
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>This line is separated from the one above by two newlines, so it will be a &lt;span style="font-style:italic">*separate paragraph*&lt;/span>.
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>This line is also a separate paragraph, but...
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>This line is only separated by a single newline, so it&amp;#39;s a separate line in the &lt;span style="font-style:italic">*same paragraph*&lt;/span>.
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Here&amp;rsquo;s a line for us to start with.&lt;/p>
-&lt;p>This line is separated from the one above by two newlines, so it will be a &lt;em>separate paragraph&lt;/em>.&lt;/p>
-&lt;p>This line is also a separate paragraph, but&amp;hellip;
-This line is only separated by a single newline, so it&amp;rsquo;s a separate line in the &lt;em>same paragraph&lt;/em>.&lt;/p>
-&lt;hr>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-markdown" data-lang="markdown">&lt;span style="display:flex;">&lt;span>This is a regular paragraph.
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&amp;lt;&lt;span style="color:#f92672">table&lt;/span>&amp;gt;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;lt;&lt;span style="color:#f92672">tr&lt;/span>&amp;gt;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;lt;&lt;span style="color:#f92672">td&lt;/span>&amp;gt;Foo&amp;lt;/&lt;span style="color:#f92672">td&lt;/span>&amp;gt;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;lt;/&lt;span style="color:#f92672">tr&lt;/span>&amp;gt;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&amp;lt;/&lt;span style="color:#f92672">table&lt;/span>&amp;gt;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>This is another regular paragraph.
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>This is a regular paragraph.&lt;/p>
-&lt;!-- raw HTML omitted -->
-&lt;p>This is another regular paragraph.&lt;/p>
-&lt;h2 id="youtube-videos">Youtube videos&lt;/h2>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-markdown" data-lang="markdown">&lt;span style="display:flex;">&lt;span>&amp;lt;&lt;span style="color:#f92672">a&lt;/span> &lt;span style="color:#a6e22e">href&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;https://www.youtube.com/watch?feature=player_embedded&amp;amp;v=ARted4RniaU
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span> &lt;span style="color:#a6e22e">target&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;_blank&amp;#34;&lt;/span>&amp;gt;&amp;lt;&lt;span style="color:#f92672">img&lt;/span> &lt;span style="color:#a6e22e">src&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;https://img.youtube.com/vi/ARted4RniaU/0.jpg&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">alt&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;IMAGE ALT TEXT HERE&amp;#34;&lt;/span> &lt;span style="color:#a6e22e">width&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;240&amp;#34;&lt;/span> &lt;span style="color:#a6e22e">height&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;180&amp;#34;&lt;/span> &lt;span style="color:#a6e22e">border&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;10&amp;#34;&lt;/span> /&amp;gt;&amp;lt;/&lt;span style="color:#f92672">a&lt;/span>&amp;gt;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Pure markdown version:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>[&lt;span style="color:#f92672">![IMAGE ALT TEXT HERE&lt;/span>](&lt;span style="color:#a6e22e">https://img.youtube.com/vi/ARted4RniaU/0.jpg&lt;/span>)](https://www.youtube.com/watch?v=ARted4RniaU)
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;!-- raw HTML omitted -->&lt;!-- raw HTML omitted -->&lt;!-- raw HTML omitted -->&lt;/p>
-&lt;p>Pure markdown version:&lt;/p>
-&lt;p>&lt;a href="https://www.youtube.com/watch?v=ARted4RniaU">&lt;img src="https://img.youtube.com/vi/ARted4RniaU/0.jpg" alt="IMAGE ALT TEXT HERE">&lt;/a>&lt;/p></description></item></channel></rss>
+&lt;p>如下，部分文本应为正文，但却被识别成标题结构。&lt;/p>
+&lt;p>&lt;img src="https://proseguys.github.io/images/pdf_extractor_report/image%203.png" alt="image.png">&lt;/p>
+&lt;p>&lt;img src="https://proseguys.github.io/images/pdf_extractor_report/image%204.png" alt="image.png">&lt;/p>
+&lt;p>实际测试中，页眉页脚未能正确去除&lt;/p>
+&lt;p>&lt;img src="https://proseguys.github.io/images/pdf_extractor_report/image%205.png" alt="image.png">&lt;/p>
+&lt;pre>&lt;code> 页眉页脚未能去除
+&lt;/code>&lt;/pre>
+&lt;p>需要从 huggingface 导入 6 个模型，显存要求较高，测试时出现爆显存现象&lt;/p>
+&lt;p>&lt;code>model_lst = [texify, layout, order, edit, detection, ocr]&lt;/code>&lt;/p>
+&lt;p>&lt;img src="https://proseguys.github.io/images/pdf_extractor_report/image%206.png" alt="image.png">&lt;/p>
+&lt;h2 id="小结">小结：&lt;/h2>
+&lt;p>在以上模块中，如果只需要获取PDF文本信息的前提下，PyMuPDF模块的效果最好，文本提取准确，提供大纲方法获取文本标题，从而分析得出文本结构。&lt;/p>
+&lt;p>若需要PDF转成Markdown格式，可以使用MinerU模块，不过当前存在模块内部依赖混乱，外部调用API不完善等问题&lt;/p></description></item></channel></rss>
