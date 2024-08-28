@@ -1,7 +1,7 @@
 ---
 title: WSL 虚拟磁盘清理
 date: 2024-08-27T09:18:59+08:00
-tags: []
+tags: ["WSL"]
 series: []
 featured: true
 ---
