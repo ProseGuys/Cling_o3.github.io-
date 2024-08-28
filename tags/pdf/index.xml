@@ -17,9 +17,9 @@
 &lt;li>MinerU&lt;/li>
 &lt;/ul>
 &lt;h3 id="pdfplumber">pdfplumber&lt;/h3>
-&lt;p>**文档地址：**&lt;a href="https://github.com/jsvine/pdfplumber">https://github.com/jsvine/pdfplumber&lt;/a>&lt;/p>
-&lt;p>**简介：**查看PDF文件以获取有关每个文本字符、矩形和线条的详细信息。并具有表格提取和可视化调试能力，基于pdfminer.six&lt;/p>
-&lt;p>**测试结果：**根据PDF的单页作为内容操作的基本单位，只支持获取纯文本信息，根据段落结构获取方式不成熟，以下为测试结果&lt;/p>
+&lt;p>&lt;strong>文档地址：&lt;/strong> &lt;a href="https://github.com/jsvine/pdfplumber">https://github.com/jsvine/pdfplumber&lt;/a>&lt;/p>
+&lt;p>&lt;strong>简介：&lt;/strong> 查看PDF文件以获取有关每个文本字符、矩形和线条的详细信息。并具有表格提取和可视化调试能力，基于pdfminer.six&lt;/p>
+&lt;p>&lt;strong>测试结果：&lt;/strong> 根据PDF的单页作为内容操作的基本单位，只支持获取纯文本信息，根据段落结构获取方式不成熟，以下为测试结果&lt;/p>
 &lt;ul>
 &lt;li>直接文字提取&lt;/li>
 &lt;/ul>
