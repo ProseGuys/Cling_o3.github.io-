@@ -1,4 +1,34 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Blogs on 人间客</title><link>https://proseguys.github.io/blog/</link><description>Recent content in Blogs on 人间客</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 06 Sep 2024 14:08:25 +0800</lastBuildDate><atom:link href="https://proseguys.github.io/blog/index.xml" rel="self" type="application/rss+xml"/><item><title>Mysql知识图谱</title><link>https://proseguys.github.io/blog/mysql_mind_map/</link><pubDate>Fri, 06 Sep 2024 14:08:25 +0800</pubDate><guid>https://proseguys.github.io/blog/mysql_mind_map/</guid><description>&lt;p>基于 &lt;a href="https://time.geekbang.org/column/intro/100020801?utm_campaign=geektime_search&amp;amp;utm_content=geektime_search&amp;amp;utm_medium=geektime_search&amp;amp;utm_source=geektime_search&amp;amp;utm_term=geektime_search">《Mysql实战四十五讲》&lt;/a>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Blogs on 人间客</title><link>https://proseguys.github.io/blog/</link><description>Recent content in Blogs on 人间客</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 20 Sep 2024 17:02:45 +0800</lastBuildDate><atom:link href="https://proseguys.github.io/blog/index.xml" rel="self" type="application/rss+xml"/><item><title>MYSQL基础架构</title><link>https://proseguys.github.io/blog/mysql_basic_arch/</link><pubDate>Fri, 20 Sep 2024 17:02:45 +0800</pubDate><guid>https://proseguys.github.io/blog/mysql_basic_arch/</guid><description>&lt;p>系统介绍mysql基础架构&lt;/p>
+&lt;p>&lt;img src="https://proseguys.github.io/images/mysql_basic_arch/mysql_logic_arch.jpg" alt="架构图">&lt;/p>
+&lt;h2 id="连接器">&lt;strong>连接器&lt;/strong>&lt;/h2>
+&lt;p>连接器功能: 跟客户端建立连接、获取权限、维持和管理连接&lt;/p>
+&lt;p>&lt;strong>PS. 一个用户成功建立连接后，即使使用管理员账号对这个用户的权限做了修改，也不会影响已经存在连接的权限。修改完成后，只有再新建的连接才会使用新的权限设置。&lt;/strong>&lt;/p>
+&lt;p>客户端如果太长时间没动静，连接器就会自动将它断开。这个时间是由参数 &lt;strong>wait_timeout&lt;/strong> 控制的，默认值是 8 小时。&lt;/p>
+&lt;p>长连接：指连接成功后，如果客户端持续有请求，则一直使用同一个连接&lt;/p>
+&lt;p>短连接：指每次执行完很少的几次查询就断开连接，下次查询再重新建立一个。&lt;/p>
+&lt;p>连接过程较复杂，因此尽量使用长连接&lt;/p>
+&lt;p>&lt;strong>长连接可能出现的问题&lt;/strong>：&lt;/p>
+&lt;p>MySQL 在执行过程中临时使用的内存是管理在连接对象里面的。这些资源会在连接断开的时候才释放。 长连接长时间不断开导致内存占用过多，被系统杀掉（OOM), 从现象上看 Mysql异常重启&lt;/p>
+&lt;p>&lt;strong>解决方案：&lt;/strong>&lt;/p>
+&lt;ol>
+&lt;li>定期断开长连接。使用一段时间，或者程序里面判断执行过一个占用内存的大查询后，断开连接，之后要查询再重连。&lt;/li>
+&lt;li>如果你用的是 MySQL 5.7 或更新版本，可以在每次执行一个比较大的操作后，通过执行 mysql_reset_connection 来重新初始化连接资源。这个过程不需要重连和重新做权限验证，但是会将连接恢复到刚刚创建完时的状态。&lt;/li>
+&lt;/ol>
+&lt;h2 id="查询缓存">&lt;strong>查询缓存&lt;/strong>&lt;/h2>
+&lt;p>建立连接后，执行语句前会先查询缓存，检查相同语句是否执行过，命中缓存则直接返回，否则继续执行。查询缓存失效非常频繁，表的任何 更新都会导致缓存失效，所以一般不使用，MySQL 8.0后，不再支持查询缓存。&lt;/p>
+&lt;h2 id="分析器">&lt;strong>分析器&lt;/strong>&lt;/h2>
+&lt;p>功能：对sql语句进行解析&lt;/p>
+&lt;ul>
+&lt;li>词法分析：通过关键字将 SQL 语句解析，生成一课对应的“解析树”，识别出sql语句中的字符串分别是什么，代表什么。&lt;/li>
+&lt;li>语法分析：判断sql语句是否满足Mysql语法，&lt;strong>MySQL 解析器&lt;/strong> 使用 MySQL 语法规则，验证和解析查询，比如关键字是否正确、 关键字顺序、前后匹配等。 &lt;strong>预处理器&lt;/strong> 通过 MySQL 语法规则进一步检查语法树是否正确，比如表和数据列是否存在，名字和别名是否有歧义。&lt;/li>
+&lt;/ul>
+&lt;h2 id="优化器">&lt;strong>优化器&lt;/strong>&lt;/h2>
+&lt;p>功能：表里面有多个索引的时候，决定使用哪个索引；或者在一个语句有多表关联（join）的时候，决定各个表的连接顺序。制定成本最低的执行计划。&lt;/p>
+&lt;h2 id="执行器">&lt;strong>执行器&lt;/strong>&lt;/h2>
+&lt;p>功能：根据优化器生成的执行计划调用存储引擎接口执行，执行计划是一个数据结构，并非字节码，MySQL 只是简单的根据执行计划逐步执行指令。&lt;/p>
+&lt;p>开始执行的时候，要先判断一下你对这个表 T 有没有执行查询的权限，如果没有，就会返回没有权限的错误，如下所示 (在工程实现上，如果命中查询缓存，会在查询缓存返回结果的时候，做权限验证。查询也会在优化器之前调用 precheck 验证权限)。&lt;/p>
+&lt;p>如果有权限，就打开表继续执行, 打开表的时候，执行器就会根据表的引擎定义，去使用这个引擎提供的接口。
+&lt;img src="https://proseguys.github.io/images/mysql_basic_arch/mysql_run_process.jpg" alt="整体架构图">&lt;/p></description></item><item><title>Mysql知识图谱</title><link>https://proseguys.github.io/blog/mysql_mind_map/</link><pubDate>Fri, 06 Sep 2024 14:08:25 +0800</pubDate><guid>https://proseguys.github.io/blog/mysql_mind_map/</guid><description>&lt;p>基于 &lt;a href="https://time.geekbang.org/column/intro/100020801?utm_campaign=geektime_search&amp;amp;utm_content=geektime_search&amp;amp;utm_medium=geektime_search&amp;amp;utm_source=geektime_search&amp;amp;utm_term=geektime_search">《Mysql实战四十五讲》&lt;/a>
 整理知识图谱&lt;/p>
 &lt;p>Mysql知识图谱, 后续更新各个知识点章节内容
 &lt;img src="https://proseguys.github.io/images/mysql_mind_map/mind_map.jpg" alt="mind_map.jpg">&lt;/p></description></item><item><title>WSL 虚拟磁盘清理</title><link>https://proseguys.github.io/blog/clean_wsl_disk/</link><pubDate>Tue, 27 Aug 2024 09:18:59 +0800</pubDate><guid>https://proseguys.github.io/blog/clean_wsl_disk/</guid><description>&lt;p>为什么在WSL里删除文件后，Windows的磁盘空间却纹丝不动？
